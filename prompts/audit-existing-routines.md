@@ -3,10 +3,10 @@
 Use this prompt when a project already has Codex automations, Claude routines, scheduled tasks, cron prompts, or agent runbooks.
 
 ```text
-Audit this project's existing routines and automations, then convert the useful parts into clean templates using the VincentShipsIt automation library conventions.
+Audit this project's existing routines and automations, then convert the useful parts into clean templates using the VincentShipsIt loops library conventions.
 
 Source library:
-- https://github.com/VincentShipsIt/automation
+- https://github.com/VincentShipsIt/loops
 - Prefer local copy if available.
 
 Inspect:
@@ -23,7 +23,7 @@ For each routine found:
 
 Create:
 - A concise audit report.
-- Clean templates under .agents/automation/ or the repo's existing automation docs location.
+- Clean templates under .agents/loops/ or the repo's existing automation docs location.
 - A migration checklist for turning drafts into live routines.
 
 Rules:

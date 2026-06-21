@@ -3,10 +3,10 @@
 Use this prompt in Codex when you want one concrete Codex app Automation draft.
 
 ```text
-Create one Codex app Automation draft for this repository using the VincentShipsIt automation template library.
+Create one Codex app Automation draft for this repository using the VincentShipsIt loops library.
 
 Source library:
-- https://github.com/VincentShipsIt/automation
+- https://github.com/VincentShipsIt/loops
 - Prefer local copy if available.
 
 Automation requested:

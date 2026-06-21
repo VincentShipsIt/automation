@@ -6,7 +6,7 @@ Use these prompts in Codex, Claude, or another coding agent. They are written fo
 
 ## Prompts
 
-- `install-in-agent.md` - install the automation library into a target project as clean, project-specific docs/templates.
+- `install-in-agent.md` - install the loops library into a target project as clean, project-specific docs/templates.
 - `create-codex-automation.md` - create one Codex app Automation from a template.
 - `create-claude-routine.md` - create one Claude Routine or Claude Desktop scheduled task from a template.
 - `audit-existing-routines.md` - inspect existing routines/automations and turn them into clean templates.
@@ -17,7 +17,7 @@ Use these prompts in Codex, Claude, or another coding agent. They are written fo
 When installing into another repo, prefer creating:
 
 ```text
-.agents/automation/
+.agents/loops/
   README.md
   codex/
   claude/

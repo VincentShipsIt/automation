@@ -1,4 +1,4 @@
-# Shared Automation Templates
+# Shared Loop Templates
 
 Shared templates are sanitized source prompts for recurring app-level work. They are distilled from local Codex Automations, local Claude scheduled tasks, and public routine examples.
 

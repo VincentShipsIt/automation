@@ -1,10 +1,10 @@
 # AGENTS.md
 
-This repository is an agent-facing library of clean templates for Codex Automations and Claude Routines.
+This repository is an agent-facing library of clean templates for Codex Automations, Claude Routines, and recurring AI-agent loops.
 
 ## Primary Goal
 
-Help an agent install or adapt recurring automation prompts into a user's project without copying project-specific details from this repo.
+Help an agent install or adapt recurring loop prompts into a user's project without copying project-specific details from this repo.
 
 ## How To Use This Repo
 

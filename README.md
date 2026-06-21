@@ -1,23 +1,23 @@
-# Automation Templates
+# Loops
 
-Clean templates and examples for recurring Codex automations and Claude routines.
+Clean templates and prompts for Codex Automations, Claude Routines, and recurring AI-agent loops.
 
 This repo is agent-friendly first. Give it to Codex, Claude, or another coding agent and have the agent install clean routine drafts into your project.
 
-This repo is not an installed automation pack. Use it as a source of prompt bodies, schedules, guardrails, and setup patterns, then create the live automation inside Codex or Claude.
+This repo is not an installed automation pack. Use it as a source of prompt bodies, schedules, guardrails, and setup patterns, then create the live loop inside Codex or Claude.
 
 ## Copy-Paste Install Prompt
 
 Paste this into an agent with your target project open:
 
 ```text
-Install the VincentShipsIt automation template library into this project as agent-friendly docs and project-specific routine drafts.
+Install the VincentShipsIt loops library into this project as agent-friendly docs and project-specific routine drafts.
 
-Source library: https://github.com/VincentShipsIt/automation
+Source library: https://github.com/VincentShipsIt/loops
 
 Create clean drafts for Codex Automations, Claude Desktop scheduled tasks, and Claude remote Routines where useful. Do not create live schedules or app automations unless explicitly asked.
 
-Read this project's AGENTS.md, CLAUDE.md, README, package scripts, existing automation docs, and issue/PR conventions. Then create .agents/automation/ with:
+Read this project's AGENTS.md, CLAUDE.md, README, package scripts, existing automation docs, and issue/PR conventions. Then create .agents/loops/ with:
 - README.md
 - shared/
 - codex/
@@ -67,7 +67,7 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
    - Webhook/API trigger for CI failures, new Sentry issues, PR opened, issue labeled ready, or release events.
    - Manual run first for every new routine.
 
-5. Create the live automation:
+5. Create the live loop:
    - Codex: create a new Automation in the Codex app, copy the prompt/settings from the `automation.toml`, start paused, run once, then enable.
    - Claude Desktop: create a scheduled task and use the matching `SKILL.md` as the prompt body. Configure schedule, model, folder, and permissions in the app.
    - Claude remote Routine: use the shared Claude templates or upstream routine examples, configure only the connectors the routine actually needs, and paste the prompt into the Routine UI.

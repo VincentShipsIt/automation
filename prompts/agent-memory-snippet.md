@@ -1,13 +1,13 @@
 # Agent Memory Snippet
 
-Paste this into `AGENTS.md`, `CLAUDE.md`, or an equivalent agent memory file when you want agents to consistently use this automation library.
+Paste this into `AGENTS.md`, `CLAUDE.md`, or an equivalent agent memory file when you want agents to consistently use this loops library.
 
 ```markdown
-## Automation And Routine Templates
+## Agent Loops
 
-When asked to create, document, audit, or improve recurring AI routines, use the VincentShipsIt automation template library:
+When asked to create, document, audit, or improve recurring AI routines, use the VincentShipsIt loops library:
 
-- Repository: https://github.com/VincentShipsIt/automation
+- Repository: https://github.com/VincentShipsIt/loops
 - Use Codex Automations for recurring repo work in the Codex app.
 - Use Claude Desktop scheduled tasks for local files, private repos, SSH workers, and `SKILL.md` prompts.
 - Use Claude remote Routines for connector/API-driven work.

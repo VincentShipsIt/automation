@@ -3,10 +3,10 @@
 Use this prompt in Claude when you want one concrete Claude Routine or Claude Desktop scheduled task draft.
 
 ```text
-Create one Claude Routine or Claude Desktop scheduled task draft for this project using the VincentShipsIt automation template library.
+Create one Claude Routine or Claude Desktop scheduled task draft for this project using the VincentShipsIt loops library.
 
 Source library:
-- https://github.com/VincentShipsIt/automation
+- https://github.com/VincentShipsIt/loops
 - Prefer local copy if available.
 
 Routine requested:

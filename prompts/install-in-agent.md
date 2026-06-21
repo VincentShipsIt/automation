@@ -1,16 +1,16 @@
-# Install Automation Templates Into This Project
+# Install Loops Into This Project
 
 Use this prompt in a coding agent while the target project is open.
 
 ```text
-Install the VincentShipsIt automation template library into this project as agent-friendly docs and project-specific routine drafts.
+Install the VincentShipsIt loops library into this project as agent-friendly docs and project-specific routine drafts.
 
 Source library:
-- GitHub: https://github.com/VincentShipsIt/automation
+- GitHub: https://github.com/VincentShipsIt/loops
 - If the library already exists locally, read the local copy instead of fetching.
 
 Goal:
-- Create clean, project-specific automation/routine drafts that can later be pasted into Codex Automations, Claude Desktop scheduled tasks, or Claude remote Routines.
+- Create clean, project-specific loop drafts that can later be pasted into Codex Automations, Claude Desktop scheduled tasks, or Claude remote Routines.
 - Do not create live schedules, webhooks, recurring jobs, or app automations unless explicitly asked after the drafts are reviewed.
 
 First inspect this project:
@@ -24,10 +24,10 @@ Choose surfaces:
 - Use Claude remote Routines for connector/API-driven work such as GitHub triage, meeting briefs, reading digests, and webhook/API-triggered workflows.
 
 Create or update:
-- .agents/automation/README.md
-- .agents/automation/shared/
-- .agents/automation/codex/
-- .agents/automation/claude/
+- .agents/loops/README.md
+- .agents/loops/shared/
+- .agents/loops/codex/
+- .agents/loops/claude/
 
 Install a small useful starter set:
 - Feature implementation

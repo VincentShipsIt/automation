@@ -1,0 +1,39 @@
+{
+  "name": "codex-automations",
+  "version": "0.1.13",
+  "description": "Share and install Codex automation packages.",
+  "type": "module",
+  "bin": {
+    "codex-automation": "bin/codex-automation.js",
+    "codex-automations": "bin/codex-automation.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "lint": "node --check bin/codex-automation.js && node --check src/*.js && node --check test/*.js",
+    "build": "npm pack --dry-run --registry=https://registry.npmjs.org"
+  },
+  "keywords": [
+    "codex",
+    "automation",
+    "cli",
+    "agents"
+  ],
+  "author": "Vlad Tansky",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vltansky/codex-automations.git"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.4.0"
+  }
+}

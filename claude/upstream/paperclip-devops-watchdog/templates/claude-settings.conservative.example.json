@@ -1,0 +1,48 @@
+{
+  "$comment": "Example Claude Code permissions for a conservative Paperclip DevOps watchdog. Review against current Claude Code docs before installing.",
+  "permissions": {
+    "allow": [
+      "Bash(paperclipai doctor)",
+      "Bash(paperclipai --version)",
+      "Bash(npm view paperclipai version)",
+      "Bash(npm list -g paperclipai)",
+      "Bash(curl -sf http://127.0.0.1:3100/)",
+      "Bash(systemctl --user is-active paperclip.service)",
+      "Bash(systemctl --user status paperclip.service)",
+      "Bash(journalctl --user -u paperclip.service)",
+      "Bash(journalctl --disk-usage)",
+      "Bash(df -h)",
+      "Bash(df -i)",
+      "Bash(free -h)",
+      "Bash(uptime)",
+      "Read(./**)",
+      "Read(**/.paperclip/instances/**)"
+    ],
+    "ask": [
+      "Bash(systemctl --user restart paperclip.service)",
+      "Bash(journalctl --vacuum-time=)",
+      "Bash(journalctl --vacuum-size=)",
+      "Bash(npm install -g paperclipai@latest)"
+    ],
+    "deny": [
+      "Read(**/.paperclip/**/secrets/*)",
+      "Read(**/.paperclip/**/.env)",
+      "Read(**/.env)",
+      "Bash(cat *.env*)",
+      "Bash(cat *secrets*)",
+      "Bash(cat *.env)",
+      "Bash(grep * .env*)",
+      "Bash(strings *master.key*)",
+      "Bash(printenv*)",
+      "Bash(env)",
+      "Bash(rm )",
+      "Bash(rm -rf )",
+      "Bash(trash )",
+      "Bash(systemctl restart ssh)",
+      "Bash(systemctl restart sshd)",
+      "Bash(ufw )",
+      "Bash(iptables )",
+      "Bash(nft )"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+version = 1
+id = "[AUTOMATION_ID]-content-factory-maintenance"
+kind = "cron"
+name = "Content Factory Maintenance - [PROJECT]"
+prompt = """
+Improve the [PROJECT] content, docs, prompt, or skill pipeline with one small high-leverage maintenance pass.
+
+Repository policy:
+- This automation is scoped only to [PROJECT]: [REPO_PATH].
+- GitHub repository: [GITHUB_REPO].
+- Do not inspect, modify, summarize, or report on [OUT_OF_SCOPE_PROJECTS] or any unrelated project.
+- Use [TRUNK] as the trunk/base branch for pull requests.
+
+Worktree hard gate:
+- Run in the Codex worktree execution environment.
+- Treat [REPO_PATH] as the source checkout only.
+- Stop if pwd resolves to the source checkout.
+- Base work from local [TRUNK] and verify the merge-base before editing.
+- Create a fresh timestamped branch formatted like [BRANCH_PREFIX]-content-YYYYMMDD-HHMMSS.
+
+Workflow:
+- Read local agent instructions and existing content workflow docs.
+- Inspect relevant prompts, templates, skills, rubrics, evaluation docs, recent changes, and open issues.
+- Optionally scan a small set of public primary sources for fresh ideas. Summarize patterns; do not copy proprietary or large verbatim text.
+- Choose one small improvement: tighter guardrails, clearer QA rubric, better evaluation checks, less stale wording, stronger daily operating loop, or improved metadata.
+- Prefer changes that improve output quality or reduce human intervention.
+- Preserve existing repository patterns and unrelated changes.
+- Run relevant lightweight validation.
+- Commit and open a pull request when files change.
+
+Output expectations:
+- Report what changed, sources used, why it improves the pipeline, validation run, skipped work, and next candidates.
+"""
+status = "PAUSED"
+rrule = "RRULE:FREQ=WEEKLY;BYDAY=MO;BYHOUR=9;BYMINUTE=15"
+model = "gpt-5.5"
+reasoning_effort = "medium"
+execution_environment = "worktree"
+cwds = ["[REPO_PATH]"]

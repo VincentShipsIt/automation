@@ -1,0 +1,383 @@
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import { fail } from "./errors.js";
+import { expandHome, fileExists } from "./utils.js";
+import { parseAutomationToml, stringifyAutomationToml } from "./toml.js";
+
+export const MANIFEST_NAME = "codex-automation.json";
+export const AUTOMATION_NAME = "automation.toml";
+export const SOURCE_NAME = "codex-automation-source.json";
+
+/**
+ * @typedef {Record<string, unknown>} AutomationToml
+ *
+ * @typedef {object} CodexAutomationManifest
+ * @property {number} schemaVersion
+ * @property {string} name
+ * @property {string} version
+ * @property {string=} title
+ * @property {string=} description
+ * @property {{ suggestedId?: string, includeMemory?: boolean, defaultStatus?: string }=} install
+ *
+ * @typedef {object} AutomationPackage
+ * @property {string} packagePath
+ * @property {string} manifestPath
+ * @property {string} automationPath
+ * @property {CodexAutomationManifest} manifest
+ * @property {AutomationToml} automation
+ *
+ * @typedef {object} InstallPlan
+ * @property {boolean} ok
+ * @property {string=} target
+ * @property {AutomationToml=} automation
+ * @property {Array<{ code?: string, message?: string }>} errors
+ * @property {Array<{ code?: string, message?: string }>} warnings
+ */
+
+export function codexHome(env = process.env) {
+  return env.CODEX_HOME || path.join(os.homedir(), ".codex");
+}
+
+export function automationRoot(env = process.env) {
+  return path.join(codexHome(env), "automations");
+}
+
+export function assertSafeId(id) {
+  if (typeof id !== "string" || !id || /[/\\]|\.\.|\0/.test(id) || !/^[A-Za-z0-9_.-]+$/.test(id)) {
+    fail("invalid_automation_id", `Unsafe automation id: ${id}`);
+  }
+  return id;
+}
+
+export function automationPath(id, env = process.env) {
+  assertSafeId(id);
+  return path.join(automationRoot(env), id, AUTOMATION_NAME);
+}
+
+export function sourceMetadataPath(id, env = process.env) {
+  assertSafeId(id);
+  return path.join(automationRoot(env), id, SOURCE_NAME);
+}
+
+export async function listAutomations(env = process.env) {
+  const root = automationRoot(env);
+  let entries = [];
+  try {
+    entries = await fs.readdir(root, { withFileTypes: true });
+  } catch (error) {
+    if (error.code === "ENOENT") return [];
+    throw error;
+  }
+
+  const rows = [];
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+    const file = path.join(root, entry.name, AUTOMATION_NAME);
+    try {
+      const automation = parseAutomationToml(await fs.readFile(file, "utf8"));
+      rows.push({
+        id: automation.id || entry.name,
+        name: automation.name || "",
+        kind: automation.kind || "",
+        status: automation.status || "",
+        path: file
+      });
+    } catch (error) {
+      if (error.code !== "ENOENT") {
+        rows.push({ id: entry.name, name: "", kind: "", status: "invalid", path: file, error: error.message });
+      }
+    }
+  }
+  return rows.sort((a, b) => a.id.localeCompare(b.id));
+}
+
+export async function readInstalled(id, env = process.env) {
+  const file = automationPath(id, env);
+  const sourceFile = sourceMetadataPath(id, env);
+  const source = await fs.readFile(sourceFile, "utf8")
+    .then((text) => JSON.parse(text))
+    .catch((error) => {
+      if (error.code === "ENOENT") return undefined;
+      throw error;
+    });
+  return { path: file, sourcePath: sourceFile, automation: parseAutomationToml(await fs.readFile(file, "utf8")), source };
+}
+
+export async function readPackage(packagePath) {
+  const stat = await fs.stat(packagePath).catch((error) => {
+    if (error.code === "ENOENT") fail("package_not_found", `Package not found: ${packagePath}`);
+    fail("package_read_error", `Cannot read package at ${packagePath}: ${error.message}`);
+  });
+  if (!stat.isDirectory()) fail("unsupported_package", "Only directory packages are supported in this version");
+
+  const manifestPath = path.join(packagePath, MANIFEST_NAME);
+  const automationFile = path.join(packagePath, AUTOMATION_NAME);
+  const manifestText = await readPackageText(manifestPath, "package_manifest_missing", "manifest");
+  const automationText = await readPackageText(automationFile, "package_automation_missing", "automation file");
+  const manifest = parseManifestJson(manifestText, manifestPath);
+  const automation = parsePackageAutomationToml(automationText, automationFile);
+  return { packagePath, manifestPath, automationPath: automationFile, manifest, automation };
+}
+
+export function validateAutomation(automation, { portable = false } = {}) {
+  const errors = [];
+  const warnings = [];
+
+  for (const key of ["version", "id", "kind", "name", "prompt", "status", "rrule"]) {
+    if (!(key in automation)) errors.push({ code: "missing_field", message: `Missing required field: ${key}` });
+  }
+  if (automation.kind && !["cron", "heartbeat"].includes(automation.kind)) {
+    errors.push({ code: "unsupported_kind", message: `Unsupported kind: ${automation.kind}` });
+  }
+  if (automation.kind === "heartbeat") {
+    warnings.push({ code: "heartbeat_template_only", message: "Heartbeat automations are thread-bound; install with care." });
+  }
+  if (!portable) {
+    for (const key of ["created_at", "updated_at"]) {
+      if (typeof automation[key] !== "number") {
+        errors.push({ code: "missing_timestamp", message: `Installed automation must include numeric ${key}` });
+      }
+    }
+  }
+  if (automation.rrule && !/(^RRULE:|^FREQ=)/.test(automation.rrule)) {
+    errors.push({ code: "invalid_rrule", message: "rrule must start with RRULE: or FREQ=" });
+  }
+  if (automation.execution_environment && !["local", "worktree"].includes(automation.execution_environment)) {
+    errors.push({ code: "unsupported_execution_environment", message: `Unsupported execution_environment: ${automation.execution_environment}` });
+  }
+  if (automation.cwds !== undefined && !Array.isArray(automation.cwds)) {
+    errors.push({ code: "invalid_cwds", message: "cwds must be an array" });
+  }
+  if (!portable && Array.isArray(automation.cwds)) {
+    for (const cwd of automation.cwds) {
+      if (typeof cwd !== "string" || !path.isAbsolute(expandHome(cwd))) {
+        errors.push({ code: "cwd_not_absolute", message: `Installed cwds must be absolute: ${cwd}` });
+      }
+    }
+  }
+
+  const joined = [automation.prompt, automation.name, automation.id].filter(Boolean).join("\n");
+  if (/(api[_-]?key|secret|token|cookie)\s*[:=]\s*['"]?[A-Za-z0-9_\-.]{12,}/i.test(joined)) {
+    warnings.push({ code: "secret_like_prompt", message: "Prompt appears to contain secret-like material." });
+  }
+  if (/\[(?:@|\$)[^\]]+\]\((?:app|plugin):\/\//.test(String(automation.prompt || ""))) {
+    warnings.push({ code: "connector_reference", message: "Prompt references connectors/plugins that may not exist on another machine." });
+  }
+  if (/\/Users\/[^/\s]+/.test(String(automation.prompt || ""))) {
+    warnings.push({ code: "local_path_reference", message: "Prompt references an absolute local path." });
+  }
+
+  return { ok: errors.length === 0, errors, warnings };
+}
+
+export function validateManifest(manifest) {
+  const errors = [];
+  if (manifest.schemaVersion !== 1) errors.push({ code: "unsupported_schema", message: "schemaVersion must be 1" });
+  if (!manifest.name) errors.push({ code: "missing_manifest_name", message: "Manifest name is required" });
+  if (!manifest.version) errors.push({ code: "missing_manifest_version", message: "Manifest version is required" });
+  return { ok: errors.length === 0, errors, warnings: [] };
+}
+
+export async function exportAutomation(id, outputDir, env = process.env) {
+  const { automation } = await readInstalled(id, env);
+  const portable = { ...automation };
+  delete portable.created_at;
+  delete portable.updated_at;
+
+  const inputs = [];
+  if (Array.isArray(portable.cwds) && portable.cwds.length > 0) {
+    inputs.push({
+      name: "workspace",
+      type: "path",
+      mapsTo: "cwds[0]",
+      required: true,
+      defaultHint: portable.cwds[0]
+    });
+    portable.cwds = ["${workspace}"];
+  }
+
+  const manifest = {
+    schemaVersion: 1,
+    name: `local/${portable.id}`,
+    version: "0.1.0",
+    title: portable.name || portable.id,
+    description: `Portable Codex automation package for ${portable.name || portable.id}.`,
+    codex: { automationKinds: [portable.kind] },
+    inputs,
+    install: {
+      suggestedId: portable.id,
+      includeMemory: false,
+      defaultStatus: "PAUSED"
+    }
+  };
+
+  await fs.mkdir(outputDir, { recursive: true });
+  await fs.writeFile(path.join(outputDir, MANIFEST_NAME), `${JSON.stringify(manifest, null, 2)}\n`);
+  await fs.writeFile(path.join(outputDir, AUTOMATION_NAME), stringifyAutomationToml(portable));
+  await fs.writeFile(path.join(outputDir, "README.md"), `# ${manifest.title}\n\n${manifest.description}\n\nInstall with:\n\n\`\`\`bash\nnpx -y codex-automations add ${path.basename(outputDir)}\n\`\`\`\n`);
+  return { outputDir, manifest, automation: portable };
+}
+
+export function prepareInstall(pkg, options = {}, env = process.env) {
+  const manifestValidation = validateManifest(pkg.manifest);
+  const automationValidation = validateAutomation(pkg.automation, { portable: true });
+  const errors = [...manifestValidation.errors, ...automationValidation.errors];
+  if (errors.length) return { ok: false, errors, warnings: [...manifestValidation.warnings, ...automationValidation.warnings] };
+
+  const id = options.id || (options.name ? slugifyName(options.name) : undefined) || pkg.manifest.install?.suggestedId || pkg.automation.id;
+  const target = automationPath(id, env);
+  const now = Date.now();
+  const automation = {
+    ...pkg.automation,
+    id,
+    name: options.name || pkg.automation.name,
+    status: options.activate ? (pkg.automation.status || "ACTIVE") : "PAUSED",
+    created_at: typeof pkg.automation.created_at === "number" ? pkg.automation.created_at : now,
+    updated_at: now
+  };
+  const warnings = [...manifestValidation.warnings, ...automationValidation.warnings];
+
+  if (Array.isArray(automation.cwds)) {
+    automation.cwds = automation.cwds.map((cwd) => {
+      if (cwd === "${workspace}") {
+        return path.resolve(expandHome(options.cwd || process.cwd()));
+      }
+      return cwd;
+    });
+  }
+
+  const installedValidation = validateAutomation(automation, { portable: false });
+  return {
+    ok: installedValidation.ok,
+    target,
+    automation,
+    errors: installedValidation.errors,
+    warnings: [...warnings, ...installedValidation.warnings]
+  };
+}
+
+export async function installPackage(pkg, options = {}, env = process.env) {
+  const plan = prepareInstall(pkg, options, env);
+  if (!plan.ok) return plan;
+
+  const exists = await fileExists(plan.target);
+  if (exists && !(options.force || options.replace)) fail("id_conflict", `Automation already exists at ${plan.target}`);
+  if (options.dryRun || options.view) {
+    return {
+      ...plan,
+      dryRun: Boolean(options.dryRun),
+      action: exists ? "replace" : "install",
+      preview: installPreview(plan, { exists, view: Boolean(options.view) })
+    };
+  }
+
+  await fs.mkdir(path.dirname(plan.target), { recursive: true });
+  await fs.writeFile(plan.target, stringifyAutomationToml(plan.automation));
+  if (options.source) {
+    await fs.writeFile(sourceMetadataPath(plan.automation.id, env), `${JSON.stringify({
+      ...options.source,
+      installedAt: new Date().toISOString()
+    }, null, 2)}\n`);
+  }
+  return { ...plan, installed: true };
+}
+
+export async function uninstallAutomation(id, { keepMemory = false } = {}, env = process.env) {
+  const dir = path.dirname(automationPath(id, env));
+  if (keepMemory) {
+    await fs.rm(path.join(dir, AUTOMATION_NAME), { force: true });
+  } else {
+    await fs.rm(dir, { recursive: true, force: true });
+  }
+  return { id, removed: true, keepMemory };
+}
+
+export async function resolveInstalledAutomation(name, env = process.env) {
+  const automations = await listAutomations(env);
+  if (!name) return { automations };
+  const query = String(name).trim();
+  const exactName = automations.filter((row) => row.name === query);
+  if (exactName.length === 1) return { automation: exactName[0], automations };
+  const exactId = automations.filter((row) => row.id === query);
+  if (exactId.length === 1) return { automation: exactId[0], automations };
+  const lower = query.toLowerCase();
+  const caseName = automations.filter((row) => String(row.name || "").toLowerCase() === lower);
+  if (caseName.length === 1) return { automation: caseName[0], automations };
+  const partial = automations.filter((row) => {
+    return String(row.name || "").toLowerCase().includes(lower) || row.id.toLowerCase().includes(lower);
+  });
+  if (partial.length === 1) return { automation: partial[0], automations };
+  if (partial.length > 1 || exactName.length > 1 || exactId.length > 1 || caseName.length > 1) {
+    fail("ambiguous_automation", `Automation name is ambiguous: ${name}`, {
+      automations: partial.map((row) => row.id)
+    });
+  }
+  fail("automation_not_found", `Automation not found: ${name}`);
+}
+
+export function diffAutomation(left, right) {
+  const a = stringifyAutomationToml(left).split("\n");
+  const b = stringifyAutomationToml(right).split("\n");
+  const max = Math.max(a.length, b.length);
+  const changes = [];
+  for (let index = 0; index < max; index += 1) {
+    if (a[index] !== b[index]) {
+      if (a[index] !== undefined) changes.push(`- ${a[index]}`);
+      if (b[index] !== undefined) changes.push(`+ ${b[index]}`);
+    }
+  }
+  return changes.join("\n");
+}
+
+function installPreview(plan, options) {
+  const nextText = stringifyAutomationToml(plan.automation);
+  const preview = {
+    target: plan.target,
+    action: options.exists ? "replace" : "install"
+  };
+
+  if (options.view) {
+    preview.automationToml = nextText;
+  }
+
+  return preview;
+}
+
+function slugifyName(value) {
+  const slug = String(value)
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  if (!slug) fail("invalid_name", "Name must contain at least one letter or number");
+  return slug;
+}
+
+async function readPackageText(file, missingCode, label) {
+  try {
+    return await fs.readFile(file, "utf8");
+  } catch (error) {
+    if (error.code === "ENOENT") fail(missingCode, `Package ${label} not found: ${file}`);
+    throw error;
+  }
+}
+
+function parseManifestJson(text, manifestPath) {
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    fail("invalid_manifest_json", `Invalid package manifest JSON at ${manifestPath}: ${error.message}`);
+  }
+}
+
+function parsePackageAutomationToml(text, automationFile) {
+  try {
+    return parseAutomationToml(text);
+  } catch (error) {
+    if (error.code === "invalid_toml") {
+      fail("invalid_automation_toml", `Invalid package automation TOML at ${automationFile}: ${error.message}`);
+    }
+    throw error;
+  }
+}

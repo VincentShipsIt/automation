@@ -1,0 +1,57 @@
+{
+  "$comment": "Example Claude Code permissions for the operator-approved autonomous Paperclip DevOps. Review carefully before installing. This grants Paperclip service restart and limited log cleanup.",
+  "permissions": {
+    "allow": [
+      "Bash(paperclipai doctor)",
+      "Bash(paperclipai --version)",
+      "Bash(npm view paperclipai version)",
+      "Bash(npm list -g paperclipai)",
+      "Bash(curl -sf http://127.0.0.1:3100/)",
+      "Bash(systemctl --user is-active paperclip.service)",
+      "Bash(systemctl --user status paperclip.service)",
+      "Bash(systemctl --user restart paperclip.service)",
+      "Bash(journalctl --user -u paperclip.service)",
+      "Bash(journalctl --disk-usage)",
+      "Bash(journalctl --vacuum-time=14d)",
+      "Bash(journalctl --vacuum-size=1G)",
+      "Bash(df -h)",
+      "Bash(df -i)",
+      "Bash(free -h)",
+      "Bash(uptime)",
+      "Bash(ps aux --sort=-%mem)",
+      "Bash(ps aux --sort=-%cpu)",
+      "Read(./**)",
+      "Read(**/.paperclip/instances/**)"
+    ],
+    "ask": [
+      "Bash(npm install -g paperclipai@latest)",
+      "Bash(apt )",
+      "Bash(apt-get )",
+      "Bash(systemctl --user enable )",
+      "Bash(systemctl --user disable )",
+      "Bash(systemctl enable )",
+      "Bash(systemctl disable )",
+      "Bash(loginctl )"
+    ],
+    "deny": [
+      "Read(**/.paperclip/**/secrets/*)",
+      "Read(**/.paperclip/**/.env)",
+      "Read(**/.env)",
+      "Bash(cat *.env*)",
+      "Bash(cat *secrets*)",
+      "Bash(cat *.env)",
+      "Bash(grep * .env*)",
+      "Bash(strings *master.key*)",
+      "Bash(printenv*)",
+      "Bash(env)",
+      "Bash(rm )",
+      "Bash(rm -rf )",
+      "Bash(trash )",
+      "Bash(systemctl restart ssh)",
+      "Bash(systemctl restart sshd)",
+      "Bash(ufw )",
+      "Bash(iptables )",
+      "Bash(nft )"
+    ]
+  }
+}

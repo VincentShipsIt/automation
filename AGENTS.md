@@ -14,11 +14,13 @@ Help an agent install or adapt recurring loop prompts into a user's project with
 - Use `prompts/create-claude-routine.md` when creating a Claude Routine or Claude Desktop scheduled task.
 - Use `prompts/audit-existing-routines.md` when the user already has routines and wants them cleaned up.
 - Use `prompts/agent-memory-snippet.md` when the user wants to add a durable instruction to `AGENTS.md`, `CLAUDE.md`, or another agent memory file.
+- Use `skills/loop-writer/` when drafting, auditing, or adapting loop templates in this repo.
 
 ## Template Rules
 
 - Keep templates project-agnostic.
 - Use placeholders such as `[PROJECT]`, `[REPO_PATH]`, `[GITHUB_REPO]`, `[TRUNK]`, and `[OUT_OF_SCOPE_PROJECTS]`.
+- Do not use `ultracode` in Codex template names, paths, ids, or headings. In this repo, `ultracode` means Claude Opus 4.8-level effort.
 - Do not add real organization names, private repo names, local paths, tokens, hostnames, issue numbers, PR URLs, run logs, or personal details.
 - Keep every routine explicit about surface, trigger, connectors/tools, state/dedupe, safe writes, forbidden actions, prompt, output, failure mode, and manual test.
 - Prefer a small set of installable routines over a broad pile of vague ideas.

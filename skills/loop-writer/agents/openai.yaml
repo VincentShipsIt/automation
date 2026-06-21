@@ -1,0 +1,4 @@
+interface:
+  display_name: "Loop Writer"
+  short_description: "Draft bounded Codex and Claude loops"
+  default_prompt: "Use $loop-writer to draft a bounded Codex Automation, Claude Routine, or shared loop template."

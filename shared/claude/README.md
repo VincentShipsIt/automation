@@ -9,6 +9,8 @@ Use them as copy-paste starting points for:
 - Claude Code remote Routines
 - Claude `/loop` maintenance prompts
 
+`ultracode` in Claude template names means Claude Opus 4.8-level effort. Do not carry that suffix into Codex templates.
+
 ## Templates
 
 | Template | Best surface | Use when |

@@ -5,6 +5,8 @@ description: Review recent trunk commits and open a fix PR for high-confidence i
 
 Review new commits on `[GITHUB_REPO]` `[TRUNK]` since the last successful review baseline SHA, or the last 24 hours when no baseline exists. Fix only high-confidence issues.
 
+`Ultracode` means Claude Opus 4.8-level effort for this scheduled task.
+
 Scope:
 - Work only in `[REPO_PATH]` and `[GITHUB_REPO]`.
 - Trunk branch: `[TRUNK]`.
@@ -43,4 +45,3 @@ Fix workflow:
 
 Output:
 - Report baseline SHA, reviewed head SHA, commit count, commit inventory, findings, notable commits, branch/PR if created, validation run, baseline update status, skipped work, blockers, and residual risk.
-

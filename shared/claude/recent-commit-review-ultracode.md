@@ -8,6 +8,7 @@ Surface:
 
 - Use as a Claude Desktop scheduled task when the repository is local and code fixes may be needed.
 - Use as a Claude remote Routine only when it has GitHub access, a safe execution environment for tests, and permission to open PRs.
+- `Ultracode` means Claude Opus 4.8-level effort for this routine.
 
 Scope:
 
@@ -65,4 +66,3 @@ Fix workflow:
 Output:
 
 - Report baseline SHA, reviewed head SHA, commit count, commit inventory, findings, notable commits, branch/PR if created, validation run, baseline update status, skipped work, blockers, and residual risk.
-

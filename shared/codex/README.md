@@ -12,7 +12,7 @@ through the Codex app or Codex automation tools, then paste the relevant prompt.
 | --- | --- | --- | --- |
 | `board-hygiene.md` | Keep GitHub issues/projects current | `local` | `low` |
 | `feature-implementation.md` | Ship exactly one ready issue | `worktree` | `xhigh` |
-| `recent-commit-review-ultracode.md` | Review recent trunk commits and fix high-confidence issues | `worktree` | `xhigh` |
+| `recent-commit-review.md` | Review recent trunk commits and fix high-confidence issues | `worktree` | `xhigh` |
 | `sentry-hotfix.md` | Fix unresolved production errors safely | `worktree` | `xhigh` |
 | `content-factory-maintenance.md` | Improve a recurring content/skill pipeline | `worktree` | `low` or `medium` |
 | `memory.md` | Keep run memory short and dedupe-aware | n/a | n/a |

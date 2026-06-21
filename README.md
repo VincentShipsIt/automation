@@ -46,7 +46,7 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
 
 2. Choose one template:
    - Codex feature work: `codex/automations/feature-implementation/automation.toml`
-   - Codex recent commit review/fix: `codex/automations/recent-commit-review-ultracode/automation.toml`
+   - Codex recent commit review/fix: `codex/automations/recent-commit-review/automation.toml`
    - Codex board cleanup: `codex/automations/board-hygiene/automation.toml`
    - Codex Sentry fix loop: `codex/automations/sentry-hotfix/automation.toml`
    - Claude local feature work: `claude/scheduled-tasks/feature-implementation/SKILL.md`
@@ -84,6 +84,7 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
 - `prompts/create-claude-routine.md` - create one Claude routine or scheduled task draft.
 - `prompts/audit-existing-routines.md` - clean up existing routines and extract reusable patterns.
 - `prompts/agent-memory-snippet.md` - paste into `AGENTS.md` or `CLAUDE.md` so future agents use this library.
+- `skills/loop-writer/` - repo-local skill for drafting or auditing loop templates.
 
 ## Safety Checklist
 
@@ -103,7 +104,7 @@ Before enabling any recurring routine:
 For autonomous engineering work, start with these:
 
 - `codex/automations/feature-implementation/automation.toml`
-- `codex/automations/recent-commit-review-ultracode/automation.toml`
+- `codex/automations/recent-commit-review/automation.toml`
 - `codex/automations/board-hygiene/automation.toml`
 - `claude/scheduled-tasks/continuous-testing-remote/SKILL.md`
 - `claude/scheduled-tasks/pr-quality-review/SKILL.md`

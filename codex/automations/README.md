@@ -7,7 +7,7 @@ These are clean templates, not raw exports. They intentionally do not include pr
 ## Templates
 
 - `feature-implementation/automation.toml` - implement exactly one ready issue in a worktree.
-- `recent-commit-review-ultracode/automation.toml` - review recent trunk commits and open safe fix PRs.
+- `recent-commit-review/automation.toml` - review recent trunk commits and open safe fix PRs.
 - `board-hygiene/automation.toml` - keep GitHub issues and project fields clean without duplicate work.
 - `sentry-hotfix/automation.toml` - inspect unresolved Sentry errors and open safe fix PRs.
 - `content-factory-maintenance/automation.toml` - improve a recurring content, docs, or skill pipeline.

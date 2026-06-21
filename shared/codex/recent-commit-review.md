@@ -1,4 +1,4 @@
-# Codex Automation: Recent Commit Review Ultracode
+# Codex Automation: Recent Commit Review
 
 Recommended settings:
 
@@ -76,4 +76,3 @@ Review workflow:
 Output expectations:
 
 - Report baseline SHA, reviewed head SHA, commit count, commit inventory, findings, notable commits, branch/PR if created, validation run, baseline update status, skipped work, blockers, and residual risk.
-

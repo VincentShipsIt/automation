@@ -6,6 +6,8 @@ These are clean templates, not raw exports. They intentionally do not include pr
 
 Each directory contains a `SKILL.md` prompt body. Claude Desktop manages schedule, enabled state, model, folder, and permissions in the app.
 
+`ultracode` in a scheduled task name means Claude Opus 4.8-level effort.
+
 ## Templates
 
 - `scheduled-task-base/`

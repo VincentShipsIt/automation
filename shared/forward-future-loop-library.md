@@ -1,6 +1,9 @@
 # Forward Future Loop Library Notes
 
-Source: https://signals.forwardfuture.ai/loop-library/
+Sources:
+
+- https://signals.forwardfuture.ai/loop-library/
+- https://www.skills.sh/forward-future/loop-library/loop-library
 
 Forward Future's Loop Library is a live catalog of repeatable AI-agent workflows. Use it as reference material for loop structure, not as automatic permission to run a loop.
 
@@ -24,5 +27,4 @@ Forward Future's Loop Library is a live catalog of repeatable AI-agent workflows
 
 ## Fit For This Repo
 
-The most useful addition from the library is not a wholesale copy. It is the stricter loop contract used by `recent-commit-review-ultracode`: baseline, current head, bounded review window, verified findings, safe fix PR, and baseline update only after a completed review cycle.
-
+The most useful addition from the library is not a wholesale copy. It is the stricter loop contract used by the recent commit review templates: baseline, current head, bounded review window, verified findings, safe fix PR, and baseline update only after a completed review cycle.

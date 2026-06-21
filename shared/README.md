@@ -13,7 +13,7 @@ shared/
     README.md
     board-hygiene.md
     feature-implementation.md
-    recent-commit-review-ultracode.md
+    recent-commit-review.md
     sentry-hotfix.md
     content-factory-maintenance.md
     memory.md

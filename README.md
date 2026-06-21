@@ -2,7 +2,35 @@
 
 Clean templates and examples for recurring Codex automations and Claude routines.
 
+This repo is agent-friendly first. Give it to Codex, Claude, or another coding agent and have the agent install clean routine drafts into your project.
+
 This repo is not an installed automation pack. Use it as a source of prompt bodies, schedules, guardrails, and setup patterns, then create the live automation inside Codex or Claude.
+
+## Copy-Paste Install Prompt
+
+Paste this into an agent with your target project open:
+
+```text
+Install the VincentShipsIt automation template library into this project as agent-friendly docs and project-specific routine drafts.
+
+Source library: https://github.com/VincentShipsIt/automation
+
+Create clean drafts for Codex Automations, Claude Desktop scheduled tasks, and Claude remote Routines where useful. Do not create live schedules or app automations unless explicitly asked.
+
+Read this project's AGENTS.md, CLAUDE.md, README, package scripts, existing automation docs, and issue/PR conventions. Then create .agents/automation/ with:
+- README.md
+- shared/
+- codex/
+- claude/
+
+Install a small useful starter set: feature implementation, board hygiene, validation, PR quality review, and worktree pruning.
+
+For each draft include: surface, trigger, connectors/tools, state/dedupe, safe writes, forbidden actions, prompt, output, failure mode, and manual test before enabling.
+
+Replace placeholders only with verified repo facts. Keep unknowns as [PLACEHOLDER]. Do not include secrets, .env contents, private host details, local usernames, raw run logs, or unrelated project details.
+```
+
+More copy-paste prompts live in `prompts/`.
 
 ## Pick The Right Surface
 
@@ -14,7 +42,9 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
 
 ## Fast Start
 
-1. Choose one template:
+1. If an agent is doing the work, start with `prompts/install-in-agent.md`.
+
+2. Choose one template:
    - Codex feature work: `codex/automations/feature-implementation/automation.toml`
    - Codex board cleanup: `codex/automations/board-hygiene/automation.toml`
    - Codex Sentry fix loop: `codex/automations/sentry-hotfix/automation.toml`
@@ -22,7 +52,7 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
    - Claude remote validation: `claude/scheduled-tasks/continuous-testing-remote/SKILL.md`
    - Claude PR review: `claude/scheduled-tasks/pr-quality-review/SKILL.md`
 
-2. Replace every placeholder:
+3. Replace every placeholder:
    - `[PROJECT]`
    - `[REPO_PATH]`
    - `[GITHUB_REPO]`
@@ -32,17 +62,25 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
    - `[OUT_OF_SCOPE_PROJECTS]`
    - `[REMOTE_WORKER]` if used
 
-3. Decide the trigger:
+4. Decide the trigger:
    - Schedule for hygiene, validation, summaries, cleanup, and drift detection.
    - Webhook/API trigger for CI failures, new Sentry issues, PR opened, issue labeled ready, or release events.
    - Manual run first for every new routine.
 
-4. Create the live automation:
+5. Create the live automation:
    - Codex: create a new Automation in the Codex app, copy the prompt/settings from the `automation.toml`, start paused, run once, then enable.
    - Claude Desktop: create a scheduled task and use the matching `SKILL.md` as the prompt body. Configure schedule, model, folder, and permissions in the app.
    - Claude remote Routine: use the shared Claude templates or upstream routine examples, configure only the connectors the routine actually needs, and paste the prompt into the Routine UI.
 
-5. Run it once manually and inspect the output before enabling the schedule.
+6. Run it once manually and inspect the output before enabling the schedule.
+
+## Agent Prompts
+
+- `prompts/install-in-agent.md` - install this library into a target project.
+- `prompts/create-codex-automation.md` - create one Codex automation draft.
+- `prompts/create-claude-routine.md` - create one Claude routine or scheduled task draft.
+- `prompts/audit-existing-routines.md` - clean up existing routines and extract reusable patterns.
+- `prompts/agent-memory-snippet.md` - paste into `AGENTS.md` or `CLAUDE.md` so future agents use this library.
 
 ## Safety Checklist
 

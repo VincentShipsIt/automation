@@ -8,10 +8,12 @@ Use these files as the durable source of truth before pasting into Codex Automat
 
 ```text
 shared/
+  forward-future-loop-library.md
   codex/
     README.md
     board-hygiene.md
     feature-implementation.md
+    recent-commit-review-ultracode.md
     sentry-hotfix.md
     content-factory-maintenance.md
     memory.md
@@ -19,6 +21,7 @@ shared/
     README.md
     scheduled-task-base.md
     feature-implementation.md
+    recent-commit-review-ultracode.md
     backlog-pickup-ultracode.md
     board-hygiene.md
     tool-fix-pass.md

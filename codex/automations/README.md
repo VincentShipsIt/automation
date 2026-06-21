@@ -7,6 +7,7 @@ These are clean templates, not raw exports. They intentionally do not include pr
 ## Templates
 
 - `feature-implementation/automation.toml` - implement exactly one ready issue in a worktree.
+- `recent-commit-review-ultracode/automation.toml` - review recent trunk commits and open safe fix PRs.
 - `board-hygiene/automation.toml` - keep GitHub issues and project fields clean without duplicate work.
 - `sentry-hotfix/automation.toml` - inspect unresolved Sentry errors and open safe fix PRs.
 - `content-factory-maintenance/automation.toml` - improve a recurring content, docs, or skill pipeline.
@@ -21,6 +22,7 @@ These are clean templates, not raw exports. They intentionally do not include pr
 - `[PROJECT_BOARD]` - board name, URL, or project identifier.
 - `[TRUNK]` - trunk branch, usually `main` or `master`.
 - `[BRANCH_PREFIX]` - safe branch prefix, such as `codex/feature`.
+- `[STATE_FILE]` - file or automation memory location for durable loop state.
 - `[OUT_OF_SCOPE_PROJECTS]` - projects this automation must not inspect.
 - `[REMOTE_VALIDATION_WORKER]` - optional remote worker for heavy checks.
 

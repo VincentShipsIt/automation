@@ -12,6 +12,7 @@ Use `../shared/claude/` for sanitized shared templates derived from local schedu
 
 - `../shared/claude/scheduled-task-base.md`
 - `../shared/claude/feature-implementation.md`
+- `../shared/claude/recent-commit-review-ultracode.md`
 - `../shared/claude/backlog-pickup-ultracode.md`
 - `../shared/claude/board-hygiene.md`
 - `../shared/claude/tool-fix-pass.md`
@@ -32,7 +33,7 @@ Use `scheduled-tasks/` for app-ready templates derived from local Claude Desktop
 ~/.claude/scheduled-tasks/
 ```
 
-The template set includes feature implementation, backlog pickup, board hygiene, tool/security/React fix passes, refactors, cleanup, remote validation, PR review, worktree pruning, docs verification, bundle checks, e2e expansion, and repo hygiene. Schedule, enabled state, model, folder, and permission settings are app-managed and are not represented in these files.
+The template set includes feature implementation, recent commit review, backlog pickup, board hygiene, tool/security/React fix passes, refactors, cleanup, remote validation, PR review, worktree pruning, docs verification, bundle checks, e2e expansion, and repo hygiene. Schedule, enabled state, model, folder, and permission settings are app-managed and are not represented in these files.
 
 ## Included Upstreams
 

@@ -31,6 +31,7 @@ Create or update:
 
 Install a small useful starter set:
 - Feature implementation
+- Recent commit review
 - Board hygiene
 - Remote validation or local validation
 - PR quality review

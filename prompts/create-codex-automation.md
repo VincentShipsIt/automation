@@ -10,12 +10,13 @@ Source library:
 - Prefer local copy if available.
 
 Automation requested:
-- Purpose: [FEATURE_IMPLEMENTATION | BOARD_HYGIENE | SENTRY_HOTFIX | CONTENT_FACTORY_MAINTENANCE | OTHER]
+- Purpose: [FEATURE_IMPLEMENTATION | RECENT_COMMIT_REVIEW | BOARD_HYGIENE | SENTRY_HOTFIX | CONTENT_FACTORY_MAINTENANCE | OTHER]
 - Project: [PROJECT]
 - Repository: [GITHUB_REPO]
 - Local path: [REPO_PATH]
 - Trunk branch: [TRUNK]
 - Project board: [PROJECT_BOARD]
+- State file or memory location: [STATE_FILE]
 - Out of scope: [OUT_OF_SCOPE_PROJECTS]
 
 Steps:

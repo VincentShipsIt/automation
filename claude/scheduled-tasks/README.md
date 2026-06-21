@@ -10,6 +10,7 @@ Each directory contains a `SKILL.md` prompt body. Claude Desktop manages schedul
 
 - `scheduled-task-base/`
 - `feature-implementation/`
+- `recent-commit-review-ultracode/`
 - `backlog-pickup-ultracode/`
 - `board-hygiene/`
 - `tool-fix-pass/`
@@ -32,6 +33,7 @@ Each directory contains a `SKILL.md` prompt body. Claude Desktop manages schedul
 - `[GITHUB_REPO]` - `owner/repo`.
 - `[TRUNK]` - trunk branch, usually `main` or `master`.
 - `[BRANCH_PREFIX]` - safe branch prefix.
+- `[STATE_FILE]` - file or scheduled task memory location for durable loop state.
 - `[OUT_OF_SCOPE_PROJECTS]` - projects this task must not inspect.
 - `[REMOTE_WORKER]` - optional remote worker name.
 - `[REMOTE_REPO_PATH]` - repository path on the remote worker.

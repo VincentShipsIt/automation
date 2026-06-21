@@ -15,6 +15,7 @@ Use them as copy-paste starting points for:
 | --- | --- | --- |
 | `scheduled-task-base.md` | Desktop scheduled task | You need a safe local task wrapper |
 | `feature-implementation.md` | Desktop scheduled task | Ship one ready issue to PR |
+| `recent-commit-review-ultracode.md` | Desktop scheduled task | Review recent trunk commits and PR high-confidence fixes |
 | `backlog-pickup-ultracode.md` | Desktop scheduled task | Fully autonomous issue pickup |
 | `board-hygiene.md` | Desktop or remote Routine | Keep GitHub boards clean |
 | `tool-fix-pass.md` | Desktop scheduled task | Run a scanner/tool and PR safe fixes |

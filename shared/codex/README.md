@@ -12,6 +12,7 @@ through the Codex app or Codex automation tools, then paste the relevant prompt.
 | --- | --- | --- | --- |
 | `board-hygiene.md` | Keep GitHub issues/projects current | `local` | `low` |
 | `feature-implementation.md` | Ship exactly one ready issue | `worktree` | `xhigh` |
+| `recent-commit-review-ultracode.md` | Review recent trunk commits and fix high-confidence issues | `worktree` | `xhigh` |
 | `sentry-hotfix.md` | Fix unresolved production errors safely | `worktree` | `xhigh` |
 | `content-factory-maintenance.md` | Improve a recurring content/skill pipeline | `worktree` | `low` or `medium` |
 | `memory.md` | Keep run memory short and dedupe-aware | n/a | n/a |
@@ -35,4 +36,5 @@ through the Codex app or Codex automation tools, then paste the relevant prompt.
 - `[PROJECT_BOARD]` - GitHub project or board name/URL.
 - `[TRUNK]` - `main` or `master`.
 - `[BRANCH_PREFIX]` - short safe branch prefix, such as `codex/feature`.
+- `[STATE_FILE]` - file or automation memory location for durable loop state.
 - `[OUT_OF_SCOPE_PROJECTS]` - comma-separated project names the run must not inspect.

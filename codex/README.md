@@ -8,6 +8,7 @@ Use `../shared/codex/` for clean shared templates derived from working Codex aut
 
 - `../shared/codex/board-hygiene.md`
 - `../shared/codex/feature-implementation.md`
+- `../shared/codex/recent-commit-review-ultracode.md`
 - `../shared/codex/sentry-hotfix.md`
 - `../shared/codex/content-factory-maintenance.md`
 - `../shared/codex/memory.md`
@@ -23,6 +24,7 @@ Use `automations/` for app-ready templates derived from local Codex automation p
 The template set includes:
 
 - Feature implementation
+- Recent commit review ultracode
 - Board hygiene
 - Sentry hotfix
 - Content factory maintenance

@@ -46,9 +46,11 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
 
 2. Choose one template:
    - Codex feature work: `codex/automations/feature-implementation/automation.toml`
+   - Codex recent commit review/fix: `codex/automations/recent-commit-review-ultracode/automation.toml`
    - Codex board cleanup: `codex/automations/board-hygiene/automation.toml`
    - Codex Sentry fix loop: `codex/automations/sentry-hotfix/automation.toml`
    - Claude local feature work: `claude/scheduled-tasks/feature-implementation/SKILL.md`
+   - Claude recent commit review/fix: `claude/scheduled-tasks/recent-commit-review-ultracode/SKILL.md`
    - Claude remote validation: `claude/scheduled-tasks/continuous-testing-remote/SKILL.md`
    - Claude PR review: `claude/scheduled-tasks/pr-quality-review/SKILL.md`
 
@@ -59,6 +61,7 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
    - `[PROJECT_BOARD]`
    - `[TRUNK]`
    - `[BRANCH_PREFIX]`
+   - `[STATE_FILE]`
    - `[OUT_OF_SCOPE_PROJECTS]`
    - `[REMOTE_WORKER]` if used
 
@@ -100,6 +103,7 @@ Before enabling any recurring routine:
 For autonomous engineering work, start with these:
 
 - `codex/automations/feature-implementation/automation.toml`
+- `codex/automations/recent-commit-review-ultracode/automation.toml`
 - `codex/automations/board-hygiene/automation.toml`
 - `claude/scheduled-tasks/continuous-testing-remote/SKILL.md`
 - `claude/scheduled-tasks/pr-quality-review/SKILL.md`
@@ -110,6 +114,11 @@ For product and operations routines, borrow the structure from:
 - `claude/upstream/routine-templates/templates/04-github-pr-triage.md`
 - `claude/upstream/routine-templates/templates/05-focus-block-handoff.md`
 - `claude/linked-examples/aakashg-claude-routines-pm-pack.md`
+
+Forward Future's Loop Library is useful for loop design patterns, especially explicit verification, authority limits, stopping conditions, and evidence-backed output:
+
+- https://signals.forwardfuture.ai/loop-library/
+- `shared/forward-future-loop-library.md`
 
 ## Template Rule
 
@@ -133,3 +142,5 @@ Manual test before enabling:
 Copied upstream repositories with explicit MIT licenses keep their license files under `upstream/`.
 
 Repositories without an explicit license are summarized and linked instead of republished under `linked-examples/`.
+
+Forward Future's Loop Library is MIT-licensed and referenced as design input in `shared/forward-future-loop-library.md`.

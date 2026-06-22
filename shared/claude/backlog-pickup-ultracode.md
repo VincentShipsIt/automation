@@ -4,7 +4,7 @@ Use this for a high-autonomy nightly task that claims and implements one eligibl
 
 ## Prompt
 
-Use high-effort reasoning and subagents where available.
+ultracode
 
 Operate fully autonomously. Never pause to ask the user anything. Make reasonable decisions and document them in the issue or PR. If genuinely blocked, comment the blocker and stop.
 

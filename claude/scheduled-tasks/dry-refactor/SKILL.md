@@ -3,6 +3,8 @@ name: dry-refactor
 description: Dedupe one small code area safely
 ---
 
+ultracode
+
 Perform one small DRY refactor in `[PROJECT]`.
 
 Scope:

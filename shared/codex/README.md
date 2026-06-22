@@ -38,3 +38,7 @@ through the Codex app or Codex automation tools, then paste the relevant prompt.
 - `[BRANCH_PREFIX]` - short safe branch prefix, such as `codex/feature`.
 - `[STATE_FILE]` - file or automation memory location for durable loop state.
 - `[OUT_OF_SCOPE_PROJECTS]` - comma-separated project names the run must not inspect.
+- `[SENTRY_ORG]` - Sentry organization slug used by sentry-hotfix and similar templates.
+- `[SENTRY_PROJECTS]` - comma-separated Sentry project slugs to query for unresolved issues.
+- `[AUTOMATION_ID]` - stable identifier for this automation (used in deduplication markers and state files).
+- `[AUTOMATION_ASSIGNEE]` - issue assignee that marks an issue as owned by this automation.

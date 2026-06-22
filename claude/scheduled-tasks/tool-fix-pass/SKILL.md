@@ -3,6 +3,8 @@ name: tool-fix-pass
 description: Run a project scanner or tool and open a safe fix PR
 ---
 
+ultracode
+
 Run one safe automated fix pass for `[PROJECT]`.
 
 Scope:
@@ -14,6 +16,7 @@ Workflow:
 - Read local agent instructions.
 - Inspect existing scripts and prior tool usage.
 - Run `[TOOL_COMMAND]` or the closest existing project script.
+- If `[TOOL_COMMAND]` is not installed, exits non-zero for an environment or configuration reason, or produces empty output, report that result and stop without opening a PR.
 - Classify findings into safe automated fixes, risky fixes, and false positives.
 - Apply only safe, local, reversible changes.
 - Do not make broad rewrites or opportunistic refactors.

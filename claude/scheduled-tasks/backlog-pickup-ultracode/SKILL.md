@@ -3,7 +3,7 @@ name: backlog-pickup-ultracode
 description: Fully autonomous pickup of one eligible backlog issue
 ---
 
-Use the highest-capability available model for this run when model choice is available.
+ultracode
 
 Operate fully autonomously: do not pause for input. Make reasonable decisions, document them in the issue or PR, and stop cleanly if blocked.
 

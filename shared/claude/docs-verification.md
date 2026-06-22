@@ -2,6 +2,8 @@
 
 ## Prompt
 
+ultracode
+
 Verify `[DOC_SCOPE]` documentation against the actual source code in `[REPO_PATH]`.
 
 Authority:

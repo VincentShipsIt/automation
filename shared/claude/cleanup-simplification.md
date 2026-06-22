@@ -2,6 +2,8 @@
 
 ## Prompt
 
+ultracode
+
 Do one task in this repository to minimize LOC without deleting features.
 
 CPU-heavy validation policy:

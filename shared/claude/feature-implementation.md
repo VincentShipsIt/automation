@@ -2,6 +2,8 @@
 
 ## Prompt
 
+ultracode
+
 Implement one ready, high-value feature or issue in this repository, conservatively and without creating duplicate work.
 
 CPU-heavy validation policy:

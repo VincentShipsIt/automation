@@ -3,6 +3,8 @@ name: bundle-size-watchdog
 description: Monitor dependency and build artifact size drift
 ---
 
+ultracode
+
 Check bundle, dependency, or build artifact size drift for `[PROJECT]`.
 
 Scope:

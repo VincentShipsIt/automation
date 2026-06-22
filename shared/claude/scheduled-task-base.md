@@ -11,7 +11,7 @@ description: [short task summary]
 Run this scheduled task autonomously.
 
 Scope:
-- Workspace: `[ABSOLUTE_REPO_PATH]`
+- Workspace: `[REPO_PATH]`
 - Repository: `[GITHUB_REPO]`
 - Base branch: `[TRUNK]`
 - This task is scoped only to `[PROJECT]`.

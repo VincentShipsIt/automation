@@ -35,6 +35,8 @@ Use `scheduled-tasks/` for app-ready templates derived from local Claude Desktop
 
 The template set includes feature implementation, recent commit review, backlog pickup, board hygiene, tool/security/React fix passes, refactors, cleanup, remote validation, PR review, worktree pruning, docs verification, bundle checks, e2e expansion, and repo hygiene. Schedule, enabled state, model, folder, and permission settings are app-managed and are not represented in these files.
 
+Ultracode-class templates (code review/build/validation) emit a bare `ultracode` token as the first prompt-body line to run at Claude Opus 4.8 effort; the app model should be set to Opus 4.8.
+
 ## Included Upstreams
 
 ### `upstream/routine-templates/`

@@ -3,9 +3,9 @@ name: recent-commit-review-ultracode
 description: Review recent trunk commits and open a fix PR for high-confidence issues
 ---
 
-Review new commits on `[GITHUB_REPO]` `[TRUNK]` since the last successful review baseline SHA, or the last 24 hours when no baseline exists. Fix only high-confidence issues.
+ultracode
 
-`Ultracode` means Claude Opus 4.8-level effort for this scheduled task.
+Review new commits on `[GITHUB_REPO]` `[TRUNK]` since the last successful review baseline SHA, or the last 24 hours when no baseline exists. Fix only high-confidence issues.
 
 Scope:
 - Work only in `[REPO_PATH]` and `[GITHUB_REPO]`.

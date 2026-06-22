@@ -5,7 +5,9 @@ safe auto-patch tools, dead-code detectors, or lint/code-quality agents.
 
 ## Prompt
 
-Run `[TOOL_NAME]` in this repository and apply only safe, reviewable fixes.
+ultracode
+
+Run `[TOOL_COMMAND]` in this repository and apply only safe, reviewable fixes.
 
 CPU-heavy validation policy:
 
@@ -25,10 +27,10 @@ Workflow:
 - Run `git fetch --all --prune` before creating any branch/worktree.
 - Use `origin/[TRUNK]` as the base branch.
 - Create a fresh timestamped branch/worktree based directly on `origin/[TRUNK]`, formatted like `[BRANCH_PREFIX]-YYYYMMDD-HHMMSS`.
-- Before editing, inspect local branches/worktrees and open PRs for similar `[TOOL_NAME]` work.
+- Before editing, inspect local branches/worktrees and open PRs for similar `[TOOL_COMMAND]` work.
 - If equivalent active work exists, update it only when it is clearly this automation's branch and safe to continue. Otherwise skip and report.
 - Verify the work branch is based directly on `origin/[TRUNK]` before editing.
-- Run `[TOOL_NAME]`.
+- Run `[TOOL_COMMAND]`.
 - Fix only clear, actionable findings with small, reviewable changes.
 - Prefer existing codebase patterns.
 - Run focused checks/tests for touched areas.

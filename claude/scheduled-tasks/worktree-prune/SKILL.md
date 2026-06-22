@@ -7,6 +7,7 @@ Prune merged local worktrees and branches for `[PROJECT]`.
 
 Scope:
 - Work only in `[REPO_PATH]`.
+- GitHub repository: `[GITHUB_REPO]`.
 - Do not inspect, modify, summarize, or report on `[OUT_OF_SCOPE_PROJECTS]`.
 
 Safety:

@@ -35,7 +35,38 @@ npx skills add Forward-Future/loop-library --skill loop-library -g
 - Keep Codex names literal and product-neutral: `recent-commit-review`, `sentry-hotfix`, `board-hygiene`.
 - Do not use `ultracode` in Codex template names, paths, ids, headings, or descriptions.
 - In this repo, `ultracode` means Claude Opus 4.8-level effort. Use it only for Claude routine templates where that effort level is intentional.
-- Keep placeholders generic: `[PROJECT]`, `[REPO_PATH]`, `[GITHUB_REPO]`, `[TRUNK]`, `[BRANCH_PREFIX]`, `[STATE_FILE]`, `[OUT_OF_SCOPE_PROJECTS]`.
+- Keep placeholders generic. Universal tokens: `[PROJECT]`, `[REPO_PATH]`, `[GITHUB_REPO]`, `[TRUNK]`,
+  `[BRANCH_PREFIX]`, `[STATE_FILE]`, `[OUT_OF_SCOPE_PROJECTS]`. Routine-specific tokens also exist
+  (e.g. `[PROJECT_BOARD]`, `[REVIEW_MARKER]`, `[TOOL_COMMAND]`, `[AUTOMATION_ASSIGNEE]`,
+  `[ALLOW_SAFE_DELETES]`). Canonical local path = `[REPO_PATH]`; canonical tool invocation =
+  `[TOOL_COMMAND]`; multi-repo routines use `[REPO_PATH_1]`/`[GITHUB_REPO_1]` etc. Source of truth:
+  `claude/scheduled-tasks/README.md` Placeholder Key and `shared/claude/README.md` Placeholder Key.
+
+## Ultracode Emit Rule
+
+Claude code-review, code-building, and remote-validation templates that should run at Opus 4.8 effort
+MUST emit a bare `ultracode` token as the FIRST line of the prompt body (after frontmatter). Rules:
+
+- The token is `ultracode` with no surrounding backticks, no prefix, no suffix — a single bare word on
+  its own line.
+- It goes in the prompt body, NOT in the task name, path, or any heading.
+- The name suffix `-ultracode` is a human-readable label only; the scheduler acts on the body token.
+
+Example correct placement:
+
+```text
+---
+name: recent-commit-review
+description: Review recent trunk commits and open a fix PR
+---
+
+ultracode
+
+Review new commits on `[GITHUB_REPO]` ...
+```
+
+Also set the task's app model to **Claude Opus 4.8**; the body token and the model selection work
+together to drive the high-effort run.
 
 ## Required Loop Contract
 
@@ -77,4 +108,6 @@ Before finishing:
 - Run `rg -n "ultracode" codex shared/codex README.md prompts` and ensure only Claude-intentional references remain outside Codex surfaces.
 - Run a private/project residue scan if any template was derived from local routines.
 - Validate `automation.toml` files when Codex templates changed.
+- Run `./validate.sh` and ensure it passes.
+- Confirm every ultracode-named or code/review/validation Claude template emits the bare `ultracode` token as the first prompt-body line.
 - Report files changed, validation run, and any unresolved setup placeholders.

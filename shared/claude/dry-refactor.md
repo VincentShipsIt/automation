@@ -2,6 +2,8 @@
 
 ## Prompt
 
+ultracode
+
 Find high-value, small-surface duplication in this repository and apply a safe DRY refactor.
 
 CPU-heavy validation policy:

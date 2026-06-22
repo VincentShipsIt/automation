@@ -3,6 +3,8 @@ name: feature-implementation
 description: Ship one ready issue to a pull request
 ---
 
+ultracode
+
 Implement one ready, high-value issue in `[PROJECT]` without creating duplicate work.
 
 CPU-heavy validation policy:
@@ -23,10 +25,19 @@ Workflow:
 - Choose exactly one ready issue not covered by active work.
 - Prefer small, shippable tasks with clear acceptance criteria.
 - Run `git fetch --all --prune`.
-- Create a fresh timestamped branch/worktree from `origin/[TRUNK]`.
+- Create a fresh timestamped branch `[BRANCH_PREFIX]-YYYYMMDD-HHMMSS` from `origin/[TRUNK]`.
 - Follow existing codebase patterns; find at least three examples before introducing a new pattern.
 - Add focused tests or validation for changed behavior.
 - Commit and open a pull request against `[TRUNK]`.
 - Do not merge the PR.
 
 If no safe ready feature is available, report why and stop.
+
+Output:
+- Selected issue (number and title).
+- Branch name and base commit.
+- Commit SHA.
+- PR URL.
+- Validation run (commands executed, pass/fail).
+- Skipped work (issues considered but not chosen, and why).
+- Residual risk (anything that could not be verified locally).

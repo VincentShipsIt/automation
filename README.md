@@ -65,6 +65,8 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
    - `[OUT_OF_SCOPE_PROJECTS]`
    - `[REMOTE_WORKER]` if used
 
+   Full placeholder reference: `claude/scheduled-tasks/README.md` and `shared/claude/README.md` Placeholder Keys.
+
 4. Decide the trigger:
    - Schedule for hygiene, validation, summaries, cleanup, and drift detection.
    - Webhook/API trigger for CI failures, new Sentry issues, PR opened, issue labeled ready, or release events.

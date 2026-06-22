@@ -3,6 +3,8 @@ name: cleanup-simplification
 description: Reduce complexity or dead weight without changing behavior
 ---
 
+ultracode
+
 Make one small cleanup pass in `[PROJECT]`.
 
 Scope:

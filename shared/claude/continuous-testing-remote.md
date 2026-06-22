@@ -2,12 +2,14 @@
 
 ## Prompt
 
+ultracode
+
 Run scheduled validation for `[PROJECT]` using `[REMOTE_WORKER]` as the remote worker for CPU-heavy checks.
 
 Remote target and CPU policy:
 
 - This task is scoped only to `[PROJECT]`.
-- Local workspace: `[LOCAL_REPO_PATH]`.
+- Local workspace: `[REPO_PATH]`.
 - Remote workspace: `[REMOTE_REPO_PATH]`.
 - Use `[REMOTE_COMMAND_PREFIX]` for CPU-heavy commands.
 - Do not run CPU-intensive tests or heavy validation locally.

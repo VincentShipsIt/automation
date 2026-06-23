@@ -11,6 +11,7 @@ These are clean templates, not raw exports. They intentionally do not include pr
 - `board-hygiene/automation.toml` - keep GitHub issues and project fields clean without duplicate work.
 - `sentry-hotfix/automation.toml` - inspect unresolved Sentry errors and open safe fix PRs.
 - `content-factory-maintenance/automation.toml` - improve a recurring content, docs, or skill pipeline.
+- `loop-discovery/automation.toml` - inspect a codebase for evidence-backed loop candidates without writing files.
 - `memory-template/memory.md` - clean memory structure for Codex automation state.
 
 ## Placeholder Key
@@ -19,6 +20,8 @@ These are clean templates, not raw exports. They intentionally do not include pr
 - `[PROJECT]` - human-readable project name.
 - `[REPO_PATH]` - absolute repo path on the machine where the automation runs.
 - `[GITHUB_REPO]` - `owner/repo`.
+- `[LOOP_LIBRARY_PATH]` - absolute path to the loops library used for duplicate checks and candidate fit.
+- `[LOOP_LIBRARY_REPO]` - `owner/repo` for the loops library.
 - `[PROJECT_BOARD]` - board name, URL, or project identifier.
 - `[TRUNK]` - trunk branch, usually `main` or `master`.
 - `[BRANCH_PREFIX]` - safe branch prefix, such as `codex/feature`.

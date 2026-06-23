@@ -49,6 +49,7 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
    - Codex recent commit review/fix: `codex/automations/recent-commit-review/automation.toml`
    - Codex board cleanup: `codex/automations/board-hygiene/automation.toml`
    - Codex Sentry fix loop: `codex/automations/sentry-hotfix/automation.toml`
+   - Codex loop discovery: `codex/automations/loop-discovery/automation.toml`
    - Claude local feature work: `claude/scheduled-tasks/feature-implementation/SKILL.md`
    - Claude recent commit review/fix: `claude/scheduled-tasks/recent-commit-review-ultracode/SKILL.md`
    - Claude remote validation: `claude/scheduled-tasks/continuous-testing-remote/SKILL.md`
@@ -58,6 +59,8 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
    - `[PROJECT]`
    - `[REPO_PATH]`
    - `[GITHUB_REPO]`
+   - `[LOOP_LIBRARY_PATH]` when discovering loop candidates
+   - `[LOOP_LIBRARY_REPO]` when discovering loop candidates
    - `[PROJECT_BOARD]`
    - `[TRUNK]`
    - `[BRANCH_PREFIX]`
@@ -84,6 +87,7 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
 - `prompts/install-in-agent.md` - install this library into a target project.
 - `prompts/create-codex-automation.md` - create one Codex automation draft.
 - `prompts/create-claude-routine.md` - create one Claude routine or scheduled task draft.
+- `prompts/discover-codebase-loops.md` - inspect a target codebase for reusable loop candidates.
 - `prompts/audit-existing-routines.md` - clean up existing routines and extract reusable patterns.
 - `prompts/agent-memory-snippet.md` - paste into `AGENTS.md` or `CLAUDE.md` so future agents use this library.
 - `skills/loop-writer/` - repo-local skill for drafting or auditing loop templates.

@@ -15,6 +15,7 @@ through the Codex app or Codex automation tools, then paste the relevant prompt.
 | `recent-commit-review.md` | Review recent trunk commits and fix high-confidence issues | `worktree` | `xhigh` |
 | `sentry-hotfix.md` | Fix unresolved production errors safely | `worktree` | `xhigh` |
 | `content-factory-maintenance.md` | Improve a recurring content/skill pipeline | `worktree` | `low` or `medium` |
+| `loop-discovery.md` | Find evidence-backed loop candidates in a target codebase | `local` | `medium` |
 | `memory.md` | Keep run memory short and dedupe-aware | n/a | n/a |
 
 ## Common Guardrails
@@ -33,6 +34,8 @@ through the Codex app or Codex automation tools, then paste the relevant prompt.
 - `[PROJECT]` - human-readable project name.
 - `[REPO_PATH]` - absolute local path selected in the Codex automation.
 - `[GITHUB_REPO]` - `owner/repo`.
+- `[LOOP_LIBRARY_PATH]` - absolute path to the loops library used for duplicate checks and candidate fit.
+- `[LOOP_LIBRARY_REPO]` - `owner/repo` for the loops library.
 - `[PROJECT_BOARD]` - GitHub project or board name/URL.
 - `[TRUNK]` - `main` or `master`.
 - `[BRANCH_PREFIX]` - short safe branch prefix, such as `codex/feature`.

@@ -1,0 +1,42 @@
+version = 1
+id = "[AUTOMATION_ID]-pr-review"
+kind = "cron"
+name = "PR Review - [PROJECT]"
+prompt = """
+Review one open pull request in [GITHUB_REPO] and report strict, actionable quality findings.
+
+Repository policy:
+- This automation is scoped only to [PROJECT]: [REPO_PATH].
+- GitHub repository: [GITHUB_REPO].
+- Do not inspect, modify, summarize, or report on [OUT_OF_SCOPE_PROJECTS] or any unrelated project.
+- Never print tokens, secrets, request bodies with sensitive data, or environment file contents.
+- Do not merge PRs, deploy, run live migrations, or write production data.
+
+Selection and dedupe:
+- Run git fetch --all --prune before selecting a PR.
+- Inspect open PRs, local branches, remote branches, worktrees, and prior review markers.
+- Review at most one open PR per run.
+- Prefer recent automation-created PRs or PRs with changes since the last review.
+- Skip PRs already reviewed at the current head with [REVIEW_MARKER].
+- If there is no suitable PR, report that and stop.
+
+Review workflow:
+- Use the Codex worktree execution environment for any checkout.
+- Check out a clean worktree for the PR branch before analysis.
+- Review current branch changes against [TRUNK].
+- Focus on correctness, maintainability, abstraction quality, codebase health, simplification, modularity, duplication, succinctness, and legibility.
+- Prioritize bugs, regressions, missing tests, unsafe behavior, and avoidable complexity.
+- Do not report style preferences or speculative concerns.
+- If the PR branch is automation-owned and an improvement is clear, small, behavior-preserving, and high-confidence, apply it to the PR branch, run focused validation, commit, and push to that same branch.
+- If the branch is not automation-owned or the improvement is broad/risky, do not edit. Report concise actionable findings instead.
+- Do not open a new PR from this review automation.
+
+Output expectations:
+- Report PR reviewed, base/head commits, findings, edits made, validation run, review marker status, skipped work, and residual risk.
+"""
+status = "PAUSED"
+rrule = "RRULE:FREQ=HOURLY;INTERVAL=1;BYMINUTE=35;BYDAY=MO,TU,WE,TH,FR"
+model = "gpt-5.5"
+reasoning_effort = "xhigh"
+execution_environment = "worktree"
+cwds = ["[REPO_PATH]"]

@@ -4,18 +4,31 @@ Examples and tooling for OpenAI Codex app Automations.
 
 ## Shared Templates
 
-Use `../shared/codex/` for clean shared templates derived from working Codex automation patterns:
+Use `../shared/local/codex/` for clean shared templates derived from working Codex automation patterns:
 
-- `../shared/codex/board-hygiene.md`
-- `../shared/codex/feature-implementation.md`
-- `../shared/codex/recent-commit-review.md`
-- `../shared/codex/sentry-hotfix.md`
-- `../shared/codex/content-factory-maintenance.md`
-- `../shared/codex/memory.md`
+- `../shared/local/codex/board-hygiene.md`
+- `../shared/local/codex/github-issue-implementation.md`
+- `../shared/local/codex/recent-commit-review.md`
+- `../shared/local/codex/sentry-hotfix.md`
+- `../shared/local/codex/pr-review.md`
+- `../shared/local/codex/tool-fix-pass.md`
+- `../shared/local/codex/dry-repo.md`
+- `../shared/local/codex/local-validation.md`
+- `../shared/local/codex/docs-verification.md`
+- `../shared/local/codex/bundle-size-watchdog.md`
+- `../shared/local/codex/nightly-e2e-expansion.md`
+- `../shared/local/codex/worktree-prune.md`
+- `../shared/local/codex/content-factory-maintenance.md`
+- `../shared/local/codex/memory.md`
+
+## Surface Folders
+
+- `automations/local/` - app-ready Codex automation templates for local/worktree execution.
+- `automations/remote/` - reserved for future connector-safe Codex remote templates.
 
 ## Clean App Automation Templates
 
-Use `automations/` for app-ready templates derived from local Codex automation patterns:
+Use `automations/local/` for app-ready templates derived from local Codex automation patterns:
 
 ```text
 ~/.codex/automations/
@@ -23,11 +36,19 @@ Use `automations/` for app-ready templates derived from local Codex automation p
 
 The template set includes:
 
-- Feature implementation
+- GitHub issue implementation
 - Recent commit review
 - Board hygiene
 - Sentry hotfix
-- Content factory maintenance
+- PR review
+- Tool fix pass
+- Dry repo
+- Local validation
+- Docs verification
+- Bundle size watchdog
+- Nightly e2e expansion
+- Worktree pruning
+- Content factory maintenance for prompt, skill, template, docs, or evaluation repos
 - Memory template
 
 ## Included Upstreams

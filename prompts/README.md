@@ -6,7 +6,7 @@ Use these prompts in Codex, Claude, or another coding agent. They are written fo
 
 ## Prompts
 
-- `install-in-agent.md` - install the loops library into a target project as clean, project-specific docs/templates.
+- `install-in-agent.md` - canonical shared install prompt for Codex, Claude, or another coding agent.
 - `create-codex-automation.md` - create one Codex app Automation from a template.
 - `create-claude-routine.md` - create one Claude Routine or Claude Desktop scheduled task from a template.
 - `audit-existing-routines.md` - inspect existing routines/automations and turn them into clean templates.
@@ -19,9 +19,26 @@ When installing into another repo, prefer creating:
 ```text
 .agents/loops/
   README.md
-  codex/
-  claude/
   shared/
+    local/
+    remote/
+  codex/
+    automations/
+      local/
+      remote/
+  claude/
+    routines/
+      local/
+      remote/
 ```
 
 If the target repo already has a different convention, follow the target repo convention instead.
+
+## Prompt Policy
+
+Use the same agent prompt for install/adapt/audit work across Codex and Claude.
+The intent contract should match across platforms: trigger, tools/connectors,
+state/dedupe, safe writes, forbidden actions, output, failure mode, and manual
+test. Platform-specific prompts should only diverge in artifact shape and app
+settings, such as Codex `automation.toml`, Claude local `SKILL.md`, or Claude
+remote Routine Markdown.

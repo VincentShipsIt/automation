@@ -15,15 +15,22 @@ Install the VincentShipsIt loops library into this project as agent-friendly doc
 
 Source library: https://github.com/VincentShipsIt/loops
 
-Create clean drafts for Codex Automations, Claude Desktop scheduled tasks, and Claude remote Routines where useful. Do not create live schedules or app automations unless explicitly asked.
+Create clean drafts for Codex Automations, Claude local routines, and Claude remote Routines where useful. Do not create live schedules or app automations unless explicitly asked.
+
+Use the same intent contract for Codex and Claude. The prompt intent, safety boundary, state/dedupe, cadence recommendation, and stopping conditions should match; only the final artifact format should differ.
 
 Read this project's AGENTS.md, CLAUDE.md, README, package scripts, existing automation docs, and issue/PR conventions. Then create .agents/loops/ with:
 - README.md
-- shared/
-- codex/
-- claude/
+- shared/local/
+- shared/remote/
+- codex/automations/local/
+- codex/automations/remote/
+- claude/routines/local/
+- claude/routines/remote/
 
-Install a small useful starter set: feature implementation, board hygiene, validation, PR quality review, and worktree pruning.
+Install a small useful starter set: GitHub issue implementation, board hygiene, validation, PR review, and worktree pruning.
+
+Create matching Codex and Claude drafts when the intent has both surfaces. If an intent is only safe on one surface, document why instead of forcing symmetry.
 
 For each draft include: surface, trigger, connectors/tools, state/dedupe, safe writes, forbidden actions, prompt, output, failure mode, and manual test before enabling.
 
@@ -32,27 +39,51 @@ Replace placeholders only with verified repo facts. Keep unknowns as [PLACEHOLDE
 
 More copy-paste prompts live in `prompts/`.
 
+## Shared Intent Catalog
+
+Use `shared/loop-intents.md` to compare Codex and Claude loops by intent.
+The platform-specific files may differ in format and app settings, but matching
+intents should select the same kind of work, enforce the same safety boundary,
+and stop for the same reasons.
+
+For install/adapt/audit work, use one shared agent prompt across Codex and
+Claude: `prompts/install-in-agent.md`. Keep separate one-off creation prompts
+only because the final artifact shape differs.
+
 ## Pick The Right Surface
 
-Use Codex Automations when the task should run against a repo in the Codex app, especially worktree-based implementation, issue hygiene, Sentry fixes, and recurring codebase maintenance.
+Use Codex Automations when the task should run against a repo in the Codex app, especially worktree-based implementation, issue hygiene, Sentry fixes, local validation, and recurring codebase maintenance.
 
-Use Claude Desktop scheduled tasks when the task needs local files, local tools, SSH workers, private repos, or Claude Code style `SKILL.md` prompts.
+Use Claude Desktop scheduled tasks when the task needs local files, local tools, private repos, or Claude Code style `SKILL.md` prompts.
 
-Use Claude remote Routines when the task is mostly connector/API driven: GitHub triage, meeting briefs, reading digests, sentiment summaries, or webhook/API-triggered workflows.
+Use Claude remote Routines when the task is mostly connector/API driven: GitHub triage, board updates, meeting briefs, reading digests, sentiment summaries, or webhook/API-triggered workflows. Keep remote routines read-only or metadata-only by default.
+
+This repo is organized by platform and execution surface:
+
+- `codex/automations/local/` - Codex app automations that run against local/worktree repo state.
+- `codex/automations/remote/` - reserved for future Codex remote/connector-safe templates.
+- `claude/routines/local/` - Claude Desktop scheduled tasks and local `/loop` prompts.
+- `claude/routines/remote/` - Claude remote Routine prompts for connector/API workflows.
+- `shared/local/` and `shared/remote/` - source prompt bodies split by execution surface.
 
 ## Fast Start
 
 1. If an agent is doing the work, start with `prompts/install-in-agent.md`.
 
 2. Choose one template:
-   - Codex feature work: `codex/automations/feature-implementation/automation.toml`
-   - Codex recent commit review/fix: `codex/automations/recent-commit-review/automation.toml`
-   - Codex board cleanup: `codex/automations/board-hygiene/automation.toml`
-   - Codex Sentry fix loop: `codex/automations/sentry-hotfix/automation.toml`
-   - Claude local feature work: `claude/scheduled-tasks/feature-implementation/SKILL.md`
-   - Claude recent commit review/fix: `claude/scheduled-tasks/recent-commit-review-ultracode/SKILL.md`
-   - Claude remote validation: `claude/scheduled-tasks/continuous-testing-remote/SKILL.md`
-   - Claude PR review: `claude/scheduled-tasks/pr-quality-review/SKILL.md`
+   - Codex GitHub issue work: `codex/automations/local/github-issue-implementation/automation.toml`
+   - Codex recent commit review/fix: `codex/automations/local/recent-commit-review/automation.toml`
+   - Codex board cleanup: `codex/automations/local/board-hygiene/automation.toml`
+   - Codex Sentry fix loop: `codex/automations/local/sentry-hotfix/automation.toml`
+   - Codex PR review: `codex/automations/local/pr-review/automation.toml`
+   - Codex tool fix pass: `codex/automations/local/tool-fix-pass/automation.toml`
+   - Codex local validation: `codex/automations/local/local-validation/automation.toml`
+   - Claude local GitHub issue work: `claude/routines/local/github-issue-implementation/SKILL.md`
+   - Claude recent commit review/fix: `claude/routines/local/recent-commit-review/SKILL.md`
+   - Claude Sentry fix loop: `claude/routines/local/sentry-hotfix/SKILL.md`
+   - Claude local validation: `claude/routines/local/local-validation/SKILL.md`
+   - Claude PR review: `claude/routines/local/pr-review/SKILL.md`
+   - Claude remote board hygiene: `claude/routines/remote/board-hygiene.md`
 
 3. Replace every placeholder:
    - `[PROJECT]`
@@ -62,10 +93,11 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
    - `[TRUNK]`
    - `[BRANCH_PREFIX]`
    - `[STATE_FILE]`
+   - `[VALIDATION_COMMANDS]` if used
    - `[OUT_OF_SCOPE_PROJECTS]`
    - `[REMOTE_WORKER]` if used
 
-   Full placeholder reference: `claude/scheduled-tasks/README.md` and `shared/claude/README.md` Placeholder Keys.
+   Full placeholder reference: `claude/routines/local/README.md` and `shared/local/claude/README.md` Placeholder Keys.
 
 4. Decide the trigger:
    - Schedule for hygiene, validation, summaries, cleanup, and drift detection.
@@ -75,13 +107,13 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
 5. Create the live loop:
    - Codex: create a new Automation in the Codex app, copy the prompt/settings from the `automation.toml`, start paused, run once, then enable.
    - Claude Desktop: create a scheduled task and use the matching `SKILL.md` as the prompt body. Configure schedule, model, folder, and permissions in the app.
-   - Claude remote Routine: use the shared Claude templates or upstream routine examples, configure only the connectors the routine actually needs, and paste the prompt into the Routine UI.
+   - Claude remote Routine: use `claude/routines/remote/` or `shared/remote/claude/`, configure only the connectors the routine actually needs, and paste the prompt into the Routine UI.
 
 6. Run it once manually and inspect the output before enabling the schedule.
 
 ## Agent Prompts
 
-- `prompts/install-in-agent.md` - install this library into a target project.
+- `prompts/install-in-agent.md` - canonical shared install prompt for Codex, Claude, or another coding agent.
 - `prompts/create-codex-automation.md` - create one Codex automation draft.
 - `prompts/create-claude-routine.md` - create one Claude routine or scheduled task draft.
 - `prompts/audit-existing-routines.md` - clean up existing routines and extract reusable patterns.
@@ -105,12 +137,21 @@ Before enabling any recurring routine:
 
 For autonomous engineering work, start with these:
 
-- `codex/automations/feature-implementation/automation.toml`
-- `codex/automations/recent-commit-review/automation.toml`
-- `codex/automations/board-hygiene/automation.toml`
-- `claude/scheduled-tasks/continuous-testing-remote/SKILL.md`
-- `claude/scheduled-tasks/pr-quality-review/SKILL.md`
-- `claude/scheduled-tasks/worktree-prune/SKILL.md`
+- `codex/automations/local/github-issue-implementation/automation.toml`
+- `codex/automations/local/recent-commit-review/automation.toml`
+- `codex/automations/local/board-hygiene/automation.toml`
+- `codex/automations/local/sentry-hotfix/automation.toml`
+- `codex/automations/local/pr-review/automation.toml`
+- `codex/automations/local/tool-fix-pass/automation.toml`
+- `codex/automations/local/dry-repo/automation.toml`
+- `codex/automations/local/local-validation/automation.toml`
+- `codex/automations/local/worktree-prune/automation.toml`
+- `claude/routines/local/github-issue-implementation/SKILL.md`
+- `claude/routines/local/recent-commit-review/SKILL.md`
+- `claude/routines/local/sentry-hotfix/SKILL.md`
+- `claude/routines/local/local-validation/SKILL.md`
+- `claude/routines/local/pr-review/SKILL.md`
+- `claude/routines/local/worktree-prune/SKILL.md`
 
 For product and operations routines, borrow the structure from:
 

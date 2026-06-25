@@ -8,9 +8,11 @@ Paste this into `AGENTS.md`, `CLAUDE.md`, or an equivalent agent memory file whe
 When asked to create, document, audit, or improve recurring AI routines, use the VincentShipsIt loops library:
 
 - Repository: https://github.com/VincentShipsIt/loops
-- Use Codex Automations for recurring repo work in the Codex app.
-- Use Claude Desktop scheduled tasks for local files, private repos, SSH workers, and `SKILL.md` prompts.
-- Use Claude remote Routines for connector/API-driven work.
+- Use `prompts/install-in-agent.md` as the canonical shared prompt for install/adapt/audit work across Codex and Claude.
+- Use the same intent contract across Codex and Claude; only the final artifact format should differ.
+- Use `codex/automations/local/` for recurring repo work in the Codex app.
+- Use `claude/routines/local/` for local files, private repos, local tools, and `SKILL.md` prompts.
+- Use `claude/routines/remote/` for read-only or metadata/API work such as GitHub board updates, triage, digests, and notifications.
 
 Before creating any routine:
 

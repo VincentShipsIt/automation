@@ -8,7 +8,7 @@ fail=0
 err(){ echo "FAIL: $*"; fail=1; }
 
 # Code review + build + remote validation tasks that MUST emit the bare ultracode trigger.
-ULTRA="feature-implementation backlog-pickup-ultracode recent-commit-review-ultracode pr-quality-review tool-fix-pass security-fix-pass react-fix-pass dry-refactor cleanup-simplification nightly-e2e-expansion docs-verification bundle-size-watchdog continuous-testing-remote"
+ULTRA="feature-implementation backlog-pickup-ultracode recent-commit-review-ultracode pr-quality-review tool-fix-pass security-fix-pass react-fix-pass dry-refactor cleanup-simplification nightly-e2e-expansion docs-verification memory-review bundle-size-watchdog continuous-testing-remote"
 
 # 1) Claude scheduled-task SKILL.md
 for f in claude/scheduled-tasks/*/SKILL.md; do

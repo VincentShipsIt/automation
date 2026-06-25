@@ -27,6 +27,7 @@ Use them as copy-paste starting points for:
 | `pr-quality-review.md` | Desktop or remote Routine | Review one open PR strictly |
 | `worktree-prune.md` | Desktop scheduled task | Remove only merged clean worktrees |
 | `docs-verification.md` | Desktop scheduled task | Verify docs against source |
+| `memory-review.md` | Desktop scheduled task | Refresh repo memory against current source truth |
 | `bundle-size-watchdog.md` | Desktop scheduled task | Monitor dependency/build artifact size |
 | `nightly-e2e-expansion.md` | Desktop scheduled task | Add exactly one nightly e2e spec |
 | `react-fix-pass.md` | Desktop scheduled task | Run one conservative React quality fix pass |
@@ -46,7 +47,7 @@ Use them as copy-paste starting points for:
 ## Placeholder Key
 
 Universal:
-- `[PROJECT]`, `[REPO_PATH]`, `[GITHUB_REPO]`, `[TRUNK]`, `[BRANCH_PREFIX]`, `[STATE_FILE]`, `[OUT_OF_SCOPE_PROJECTS]`.
+- `[PROJECT]`, `[REPO_PATH]`, `[GITHUB_REPO]`, `[TRUNK]`, `[BRANCH_PREFIX]`, `[STATE_FILE]`, `[MEMORY_SCOPE]`, `[OUT_OF_SCOPE_PROJECTS]`.
 
 Remote / worker:
 - `[REMOTE_WORKER]`, `[REMOTE_REPO_PATH]`, `[REMOTE_COMMAND_PREFIX]`.

@@ -22,6 +22,7 @@ Use `../shared/claude/` for sanitized shared templates derived from local schedu
 - `../shared/claude/pr-quality-review.md`
 - `../shared/claude/worktree-prune.md`
 - `../shared/claude/docs-verification.md`
+- `../shared/claude/memory-review.md`
 - `../shared/claude/bundle-size-watchdog.md`
 - `../shared/claude/nightly-e2e-expansion.md`
 
@@ -33,7 +34,7 @@ Use `scheduled-tasks/` for app-ready templates derived from local Claude Desktop
 ~/.claude/scheduled-tasks/
 ```
 
-The template set includes feature implementation, recent commit review, backlog pickup, board hygiene, tool/security/React fix passes, refactors, cleanup, remote validation, PR review, worktree pruning, docs verification, bundle checks, e2e expansion, and repo hygiene. Schedule, enabled state, model, folder, and permission settings are app-managed and are not represented in these files.
+The template set includes feature implementation, recent commit review, backlog pickup, board hygiene, tool/security/React fix passes, refactors, cleanup, remote validation, PR review, worktree pruning, docs verification, memory review, bundle checks, e2e expansion, and repo hygiene. Schedule, enabled state, model, folder, and permission settings are app-managed and are not represented in these files.
 
 Ultracode-class templates (code review/build/validation) emit a bare `ultracode` token as the first prompt-body line to run at Claude Opus 4.8 effort; the app model should be set to Opus 4.8.
 

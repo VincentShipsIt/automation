@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # validate.sh - lint the loops template library.
 # Checks: SKILL.md frontmatter + name==dir, ultracode trigger on the code/review/validation set,
 # codex automation.toml required keys, and that every placeholder used is documented in a README.
@@ -21,15 +21,29 @@ for f in claude/routines/local/*/SKILL.md; do
   body_first=$(awk '/^---$/{d++; next} d>=2 && NF {print; exit}' "$f")
   case " $ULTRA " in
     *" $dir "*) [ "$body_first" = "ultracode" ] || err "$f: ultracode-set task but first body line is '$body_first' (want bare 'ultracode')" ;;
+    *) [ "$body_first" = "ultracode" ] && err "$f: non-ultracode-set task '$dir' must NOT start with bare 'ultracode'" ;;
   esac
 done
 
-# 2) Codex automation.toml required keys
+# 1b) Skill SKILL.md frontmatter + name==dir
+for f in skills/*/SKILL.md; do
+  [ -e "$f" ] || continue
+  dir=$(basename "$(dirname "$f")")
+  grep -q '^name:' "$f" || err "$f: missing 'name:' frontmatter"
+  grep -q '^description:' "$f" || err "$f: missing 'description:' frontmatter"
+  name=$(awk -F': ' '/^name:/{sub(/^name: */,""); print; exit}' "$f" | tr -d '\r')
+  [ "$name" = "$dir" ] || err "$f: name '$name' != dir '$dir'"
+done
+
+# 2) Codex automation.toml required keys + ultracode prohibition
 for f in codex/automations/local/*/automation.toml; do
   [ -e "$f" ] || continue
   for k in version id kind name prompt status rrule; do
     grep -qE "^$k[[:space:]]*=" "$f" || err "$f: missing required key '$k'"
   done
+  dir=$(basename "$(dirname "$f")")
+  case "$dir" in *ultracode*) err "$f: 'ultracode' must not appear in a Codex automation directory name" ;; esac
+  grep -qiE '^(id|name|kind)[[:space:]]*=.*ultracode' "$f" && err "$f: 'ultracode' must not appear in Codex id/name/kind"
 done
 
 # 3) Placeholder documentation coverage (authored files only; upstream excluded)
@@ -48,6 +62,13 @@ while read -r tok; do
   grep -qxF "$tok" "$tmp_doc" || err "placeholder $tok is used but not documented in any README/key"
 done < "$tmp_used"
 rm -f "$tmp_used" "$tmp_doc" "$tmp_used_files" "$tmp_doc_files"
+
+# 4) Leaked-data scan (authored files only; upstream/linked-examples excluded by the path set)
+leak=$(grep -rnE '/Users/|/home/[a-z]|ghp_[A-Za-z0-9]{20,}|gho_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{10,}|AIza[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----' \
+  README.md AGENTS.md claude/routines shared codex/automations prompts skills 2>/dev/null || true)
+if [ -n "$leak" ]; then
+  while IFS= read -r line; do err "leaked absolute path or secret-shaped string: $line"; done <<< "$leak"
+fi
 
 if [ "$fail" -eq 0 ]; then echo "OK: all checks passed"; fi
 exit $fail

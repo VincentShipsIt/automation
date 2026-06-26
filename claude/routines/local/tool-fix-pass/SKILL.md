@@ -18,6 +18,7 @@ Scope:
 Workflow:
 - Read local agent instructions.
 - Inspect existing scripts and prior tool usage for `[TOOL_FOCUS]`.
+- Search open PRs, branches, and worktrees for active `[TOOL_COMMAND]` or `[TOOL_FOCUS]` work before creating a branch. If equivalent active work exists on an automation-owned branch, skip and report it.
 - If `[TOOL_COMMAND]` is still a placeholder or not configured, report required setup and stop.
 - If `[TOOL_BASELINE_COMMAND]` is configured, run it first and record the baseline output.
 - Run `[TOOL_COMMAND]` or the closest existing project script.

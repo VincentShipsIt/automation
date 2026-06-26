@@ -14,7 +14,7 @@ Repository policy:
 - Never print tokens, secrets, request bodies with sensitive data, or environment file contents.
 
 Sentry policy:
-- Check unresolved Sentry issues for the configured organization/project scope.
+- Check unresolved Sentry issues for [SENTRY_ORG] and [SENTRY_PROJECTS].
 - Use available Sentry tools, or CLI/API credentials already available in the environment.
 - Inspect latest event, stacktrace, route, environment, release, tags, breadcrumbs, and suspect code before deciding whether a code change is needed.
 - Check open PRs and recent branches for issue short ID, title, route, and stack signature before creating duplicate work.

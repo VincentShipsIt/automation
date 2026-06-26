@@ -28,6 +28,7 @@ Workflow:
 - Use existing codebase patterns and at least three examples before introducing new structure.
 - Run scoped validation only.
 - Push, open a PR, and comment with the PR link when supported.
+- Do not merge the PR.
 
 Resource limits:
 - Do not run full test suites, full builds, dev servers, docker, or watch mode locally.

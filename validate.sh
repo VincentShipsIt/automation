@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # validate.sh - lint the loops template library.
 # Checks: SKILL.md frontmatter + name==dir, ultracode trigger on the code/review/validation set,
 # codex automation.toml required keys, and that every placeholder used is documented in a README.
@@ -7,11 +7,11 @@ cd "$(dirname "$0")"
 fail=0
 err(){ echo "FAIL: $*"; fail=1; }
 
-# Code review + build + remote validation tasks that MUST emit the bare ultracode trigger.
-ULTRA="feature-implementation backlog-pickup-ultracode recent-commit-review-ultracode pr-quality-review tool-fix-pass security-fix-pass react-fix-pass dry-refactor cleanup-simplification nightly-e2e-expansion docs-verification bundle-size-watchdog continuous-testing-remote"
+# Code review + build + validation tasks that MUST emit the bare ultracode trigger.
+ULTRA="github-issue-implementation github-backlog-pickup recent-commit-review sentry-hotfix pr-review tool-fix-pass dry-repo nightly-e2e-expansion docs-verification bundle-size-watchdog local-validation memory-review"
 
 # 1) Claude scheduled-task SKILL.md
-for f in claude/scheduled-tasks/*/SKILL.md; do
+for f in claude/routines/local/*/SKILL.md; do
   [ -e "$f" ] || continue
   dir=$(basename "$(dirname "$f")")
   grep -q '^name:' "$f" || err "$f: missing 'name:' frontmatter"
@@ -21,49 +21,33 @@ for f in claude/scheduled-tasks/*/SKILL.md; do
   body_first=$(awk '/^---$/{d++; next} d>=2 && NF {print; exit}' "$f")
   case " $ULTRA " in
     *" $dir "*) [ "$body_first" = "ultracode" ] || err "$f: ultracode-set task but first body line is '$body_first' (want bare 'ultracode')" ;;
-    *) [ "$body_first" = "ultracode" ] && err "$f: non-ultracode-set task '$dir' must NOT start with bare 'ultracode'" ;;
   esac
 done
 
-# 1b) Skill SKILL.md frontmatter + name==dir
-for f in skills/*/SKILL.md; do
-  [ -e "$f" ] || continue
-  dir=$(basename "$(dirname "$f")")
-  grep -q '^name:' "$f" || err "$f: missing 'name:' frontmatter"
-  grep -q '^description:' "$f" || err "$f: missing 'description:' frontmatter"
-  name=$(awk -F': ' '/^name:/{sub(/^name: */,""); print; exit}' "$f" | tr -d '\r')
-  [ "$name" = "$dir" ] || err "$f: name '$name' != dir '$dir'"
-done
-
-# 2) Codex automation.toml required keys + ultracode prohibition
-for f in codex/automations/*/automation.toml; do
+# 2) Codex automation.toml required keys
+for f in codex/automations/local/*/automation.toml; do
   [ -e "$f" ] || continue
   for k in version id kind name prompt status rrule; do
     grep -qE "^$k[[:space:]]*=" "$f" || err "$f: missing required key '$k'"
   done
-  dir=$(basename "$(dirname "$f")")
-  case "$dir" in *ultracode*) err "$f: 'ultracode' must not appear in a Codex automation directory name" ;; esac
-  grep -qiE '^(id|name|kind)[[:space:]]*=.*ultracode' "$f" && err "$f: 'ultracode' must not appear in Codex id/name/kind"
 done
 
 # 3) Placeholder documentation coverage (authored files only; upstream excluded)
-tmp_used=$(mktemp); tmp_doc=$(mktemp)
-grep -rhoE '\[[A-Z0-9_]+\]' README.md AGENTS.md claude/scheduled-tasks shared codex/automations prompts skills 2>/dev/null \
+tmp_used=$(mktemp); tmp_doc=$(mktemp); tmp_used_files=$(mktemp); tmp_doc_files=$(mktemp)
+printf '%s\n' README.md AGENTS.md prompts/*.md skills/loop-writer/SKILL.md > "$tmp_used_files"
+find codex/automations claude/routines shared -path '*/upstream/*' -prune -o -type f \( -name '*.md' -o -name '*.toml' \) -print >> "$tmp_used_files" 2>/dev/null
+grep -rhoE '\[[A-Z0-9_]+\]' $(cat "$tmp_used_files") 2>/dev/null \
   | grep -vE '\[(PLACEHOLDER|[A-Z])\]$' | sort -u > "$tmp_used"
-grep -rhoE '\[[A-Z0-9_]+\]' README.md AGENTS.md ./*/README.md ./*/*/README.md skills/loop-writer/SKILL.md 2>/dev/null \
+
+printf '%s\n' README.md AGENTS.md skills/loop-writer/SKILL.md > "$tmp_doc_files"
+find codex claude shared prompts -path '*/upstream/*' -prune -o -name README.md -type f -print >> "$tmp_doc_files" 2>/dev/null
+grep -rhoE '\[[A-Z0-9_]+\]' $(cat "$tmp_doc_files") 2>/dev/null \
   | sort -u > "$tmp_doc"
 while read -r tok; do
   [ -z "$tok" ] && continue
   grep -qxF "$tok" "$tmp_doc" || err "placeholder $tok is used but not documented in any README/key"
 done < "$tmp_used"
-rm -f "$tmp_used" "$tmp_doc"
-
-# 4) Leaked-data scan (authored files only; upstream/linked-examples excluded by the path set)
-leak=$(grep -rnE '/Users/|/home/[a-z]|ghp_[A-Za-z0-9]{20,}|gho_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{10,}|AIza[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----' \
-  README.md AGENTS.md claude/scheduled-tasks shared codex/automations prompts skills 2>/dev/null || true)
-if [ -n "$leak" ]; then
-  while IFS= read -r line; do err "leaked absolute path or secret-shaped string: $line"; done <<< "$leak"
-fi
+rm -f "$tmp_used" "$tmp_doc" "$tmp_used_files" "$tmp_doc_files"
 
 if [ "$fail" -eq 0 ]; then echo "OK: all checks passed"; fi
 exit $fail

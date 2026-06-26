@@ -1,0 +1,44 @@
+version = 1
+id = "[AUTOMATION_ID]-docs-verification"
+kind = "cron"
+name = "Docs Verification - [PROJECT]"
+prompt = """
+Verify [DOC_SCOPE] documentation against the actual source code in [REPO_PATH] and open a correction PR when claims are stale.
+
+Repository policy:
+- This automation is scoped only to [PROJECT]: [REPO_PATH].
+- GitHub repository: [GITHUB_REPO].
+- Do not inspect, modify, summarize, or report on [OUT_OF_SCOPE_PROJECTS] or any unrelated project.
+- Documentation files in scope: [DOC_FILE_1], [DOC_FILE_2], [DOC_FILE_3].
+- Source files to cross-reference: [SOURCE_PATH_1], [SOURCE_PATH_2], [SOURCE_PATH_3].
+- Use [TRUNK] as the sole trunk/base branch. Open pull requests against [TRUNK] only.
+- Do not edit source code unless this automation is explicitly reconfigured to allow it.
+
+Worktree hard gate:
+- Run in the Codex worktree execution environment.
+- Treat [REPO_PATH] as the source checkout only.
+- Stop if pwd resolves to the source checkout.
+- Run git fetch --all --prune before creating any branch or commit.
+- Base work from latest origin/[TRUNK].
+- Create a fresh timestamped branch formatted like [BRANCH_PREFIX]-docs-YYYYMMDD-HHMMSS only when docs need changes.
+
+Verification workflow:
+- Read local agent instructions before editing.
+- Verify documentation claims against source, not assumptions.
+- Check method signatures, schema fields, constants, values, flow descriptions, file paths, interface shapes, deleted features, setup commands, and examples.
+- Update last verified dates only after checking the relevant source.
+- If all claims are current, report the checked files and stop without creating a branch.
+- If changes are needed, edit only documentation files in scope.
+- Run relevant lightweight docs validation or link/check formatting when available.
+- Commit, push, and open one PR against [TRUNK].
+- Do not merge the PR.
+
+Output expectations:
+- Report files checked, source files checked, claims corrected, branch, base commit, commit, PR URL, validation, uncertain claims, skipped work, and residual risk.
+"""
+status = "PAUSED"
+rrule = "RRULE:FREQ=WEEKLY;BYDAY=WE;BYHOUR=9;BYMINUTE=40"
+model = "gpt-5.5"
+reasoning_effort = "xhigh"
+execution_environment = "worktree"
+cwds = ["[REPO_PATH]"]

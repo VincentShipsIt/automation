@@ -1,0 +1,82 @@
+# Shared Codex Automation Templates
+
+These shared templates are sanitized from local Codex app automations and normalized
+against the public examples in `../../../codex/upstream/`.
+
+They are prompt templates, not live automation files. Create live automations
+through the Codex app or Codex automation tools, then paste the relevant prompt.
+
+## Templates
+
+| Template | Use when | Recommended environment | Reasoning |
+| --- | --- | --- | --- |
+| `board-hygiene.md` | Keep GitHub issues/projects current | `local` | `low` |
+| `github-issue-implementation.md` | Ship exactly one ready GitHub issue | `worktree` | `xhigh` |
+| `recent-commit-review.md` | Review recent trunk commits and fix high-confidence issues | `worktree` | `xhigh` |
+| `sentry-hotfix.md` | Fix unresolved production errors safely | `worktree` | `xhigh` |
+| `pr-review.md` | Review one open PR and improve only automation-owned branches | `worktree` | `xhigh` |
+| `tool-fix-pass.md` | Run one configured scanner/tool and PR safe fixes | `worktree` | `xhigh` |
+| `dry-repo.md` | Make one behavior-preserving simplification | `worktree` | `xhigh` |
+| `local-validation.md` | Run read-only validation in the local checkout | `local` | `xhigh` |
+| `docs-verification.md` | Verify docs against source and PR corrections | `worktree` | `xhigh` |
+| `bundle-size-watchdog.md` | Report dependency and artifact size drift | `local` | `medium` |
+| `nightly-e2e-expansion.md` | Add exactly one focused nightly e2e spec | `worktree` | `xhigh` |
+| `worktree-prune.md` | Remove only clean, provably merged local worktrees when enabled | `local` | `medium` |
+| `content-factory-maintenance.md` | Improve a prompt, skill, template, docs, or evaluation pipeline | `worktree` | `low` or `medium` |
+| `memory-review.md` | Refresh repo memory against current source truth | `worktree` | `xhigh` |
+| `loop-discovery.md` | Find evidence-backed loop candidates in a target codebase | `local` | `medium` |
+
+## Support Files
+
+| File | Use when |
+| --- | --- |
+| `memory.md` | Keep run state short and dedupe-aware between recurring automation runs. This is not a runnable automation. |
+
+## Common Guardrails
+
+- Scope each automation to exactly one repository or workspace.
+- Name unrelated projects explicitly as out of scope.
+- Use metadata-only mode for board hygiene; do not create branches or PRs.
+- Use worktree mode for code changes.
+- Choose exactly one unit of work per run unless the task is read-only.
+- Search for duplicate issues, branches, worktrees, and PRs before creating anything.
+- Stop cleanly when no safe work exists.
+- Report what changed, what was skipped, validation run, and residual risk.
+
+## Placeholder Key
+
+- `[PROJECT]` - human-readable project name.
+- `[REPO_PATH]` - absolute local path selected in the Codex automation.
+- `[GITHUB_REPO]` - `owner/repo`.
+- `[PROJECT_BOARD]` - GitHub project or board name/URL.
+- `[TRUNK]` - `main` or `master`.
+- `[BRANCH_PREFIX]` - short safe branch prefix, such as `codex/feature`.
+- `[STATE_FILE]` - file or automation memory location for durable loop state.
+- `[OUT_OF_SCOPE_PROJECTS]` - comma-separated project names the run must not inspect.
+- `[SENTRY_ORG]` - Sentry organization slug used by sentry-hotfix and similar templates.
+- `[SENTRY_PROJECTS]` - comma-separated Sentry project slugs to query for unresolved issues.
+- `[AUTOMATION_ID]` - stable identifier for this automation (used in deduplication markers and state files).
+- `[AUTOMATION_ASSIGNEE]` - issue assignee that marks an issue as owned by this automation.
+- `[REVIEW_MARKER]` - hidden marker string used to avoid reviewing the same PR head twice.
+- `[TOOL_COMMAND]` - command this automation runs, such as `bun run lint`.
+- `[TOOL_BASELINE_COMMAND]` - optional read-only baseline command for tools that compare before/after output.
+- `[TOOL_VERIFY_COMMAND]` - optional final scan command that must pass or show verified improvement.
+- `[TOOL_FOCUS]` - configured scanner/fix focus, such as security, React, lint, dead code, dependencies, or accessibility.
+- `[VALIDATION_COMMANDS]` - explicit local validation commands to run sequentially.
+- `[ALLOW_SAFE_DELETES]` - boolean gate for local worktree/branch deletion.
+- `[DOC_SCOPE]`, `[DOC_FILE_1]`, `[DOC_FILE_2]`, `[DOC_FILE_3]` - documentation verification scope and files.
+- `[SOURCE_PATH_1]`, `[SOURCE_PATH_2]`, `[SOURCE_PATH_3]` - source files checked by docs verification.
+- `[DEPENDENCY_DIR]`, `[ARTIFACT_PATH_1]`, `[ARTIFACT_PATH_2]` - size watchdog targets.
+- `[MAX_DEPENDENCY_SIZE]`, `[MAX_PACKAGE_COUNT]`, `[MAX_ARTIFACT_SIZE]` - size watchdog thresholds.
+- `[MEMORY_SCOPE]` - repo memory files or globs memory-review may edit, such as `AGENTS.md`, `CLAUDE.md`, or `.agents/memory/`.
+- `[LOOP_LIBRARY_PATH]` - absolute path to the loops library used by loop-discovery for duplicate checks and candidate fit.
+- `[LOOP_LIBRARY_REPO]` - `owner/repo` for the loops library used by loop-discovery.
+
+## Tool Fix Presets
+
+React Doctor:
+
+- `[TOOL_FOCUS]` = `React Doctor`
+- `[TOOL_BASELINE_COMMAND]` = `pnpm exec react-doctor . --verbose --yes --offline --fail-on none`
+- `[TOOL_COMMAND]` = `pnpm exec react-doctor . --verbose --yes --offline --fail-on error`
+- `[TOOL_VERIFY_COMMAND]` = `pnpm exec react-doctor . --verbose --yes --offline --fail-on error`

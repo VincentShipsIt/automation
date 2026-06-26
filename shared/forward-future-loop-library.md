@@ -20,7 +20,11 @@ Forward Future's Loop Library is a live catalog of repeatable AI-agent workflows
 
 - Production error sweep: trace actionable errors to root cause, verify the fix, open a PR, and stop cleanly when no action exists.
 - Loop Harness verification loop: ship scheduled repository work only after an independent verification pass.
+- React Doctor repair loop: run a baseline scan, fix a small batch of genuine React findings, rerun the scan and project checks, and keep only verified improvements. Fits `tool-fix-pass` with a configured React Doctor command.
+- Dependency triage loop: process a fixed snapshot of dependency-update PRs with release notes, advisories, isolated tests, risk classification, and explicit merge/approval boundaries.
+- Fresh-clone loop: repeatedly test README setup from a clean clone until hidden setup assumptions are removed.
 - Recent-feedback sweep: turn recent corrections into failure patterns, fix confirmed matches, and rerun the audit.
+- Promise-to-proof loop: inventory customer-facing claims, verify each against product evidence, and fix the riskiest unsupported claim first.
 - Clodex adversarial-review loop: use an independent reviewer and iterate only on blocking findings.
 - Codex completion-contract loop: define required evidence before a long-running agent reports done.
 - Groundtruth loop: audit from current code and configuration rather than framework assumptions.

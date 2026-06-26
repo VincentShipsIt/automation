@@ -1,0 +1,47 @@
+version = 1
+id = "[AUTOMATION_ID]-dry-repo"
+kind = "cron"
+name = "DRY Repo - [PROJECT]"
+prompt = """
+Make one small behavior-preserving simplification in [PROJECT] without deleting features.
+
+Repository policy:
+- This automation is scoped only to [PROJECT]: [REPO_PATH].
+- GitHub repository: [GITHUB_REPO].
+- Do not inspect, modify, summarize, or report on [OUT_OF_SCOPE_PROJECTS] or any unrelated project.
+- Use [TRUNK] as the sole trunk/base branch. Open pull requests against [TRUNK] only.
+- Never deploy, run live migrations, delete production data, or remove product behavior.
+
+Worktree hard gate:
+- Run in the Codex worktree execution environment.
+- Treat [REPO_PATH] as the source checkout only.
+- Stop if pwd resolves to the source checkout.
+- Run git fetch --all --prune before creating any branch or commit.
+- Base work from latest origin/[TRUNK].
+- Create a fresh timestamped branch formatted like [BRANCH_PREFIX]-simplify-YYYYMMDD-HHMMSS.
+
+Selection:
+- Inspect local agent instructions, recent PRs, branches, and worktrees.
+- Search for one clear low-risk simplification target: duplicated logic, redundant branches, unnecessary indirection, stale comments, duplicate config, or obvious unreachable code.
+- Skip if equivalent cleanup/refactor work is already active.
+- Prefer targets with focused tests or cheap validation.
+- Do not bundle unrelated cleanup.
+
+Workflow:
+- Preserve behavior exactly.
+- Do not remove features, public APIs, migrations, compatibility code, or uncertain behavior.
+- Find at least three local examples before introducing or changing an abstraction.
+- Keep scope small and reviewable.
+- Run focused validation for touched areas.
+- Commit, push, and open one PR against [TRUNK].
+- Do not merge the PR.
+
+Output expectations:
+- Report simplification target, evidence it was safe, files changed, branch, base commit, commit, PR URL, validation, skipped candidates, and residual risk.
+"""
+status = "PAUSED"
+rrule = "RRULE:FREQ=WEEKLY;BYDAY=TH;BYHOUR=9;BYMINUTE=25"
+model = "gpt-5.5"
+reasoning_effort = "xhigh"
+execution_environment = "worktree"
+cwds = ["[REPO_PATH]"]

@@ -1,0 +1,47 @@
+# Codex Automation: Tool Fix Pass
+
+Recommended settings:
+
+- Kind: cron
+- Execution environment: worktree
+- Reasoning effort: xhigh
+- Write surface: repo branch plus pull request
+
+## Prompt
+
+Run one configured scanner or quality tool for `[PROJECT]` and open a safe fix PR only for clear findings.
+
+Scope:
+
+- Work only in `[REPO_PATH]` and `[GITHUB_REPO]`.
+- Tool command: `[TOOL_COMMAND]`.
+- Optional baseline command: `[TOOL_BASELINE_COMMAND]`.
+- Optional verification command: `[TOOL_VERIFY_COMMAND]`.
+- Tool focus: `[TOOL_FOCUS]`.
+- Do not inspect, modify, summarize, or report on `[OUT_OF_SCOPE_PROJECTS]`.
+- Open pull requests against `[TRUNK]` only.
+
+Workflow:
+
+- Read local agent instructions before editing.
+- Run `git fetch --all --prune`.
+- Run in the Codex worktree execution environment.
+- Base work from latest `origin/[TRUNK]`.
+- Search open PRs, branches, and worktrees for active `[TOOL_COMMAND]` or `[TOOL_FOCUS]` work before creating a branch.
+- If equivalent active work exists, skip and report it.
+- If `[TOOL_COMMAND]` is still a placeholder or not configured, report required setup and stop.
+- If `[TOOL_BASELINE_COMMAND]` is configured, run it first and record the baseline output.
+- Run `[TOOL_COMMAND]`.
+- If the tool is missing, misconfigured, fails for environment reasons, or returns no actionable findings, report the result and stop without opening a PR.
+- Classify findings into safe automated fixes, risky fixes, and false positives.
+- Apply only clear, local, reversible fixes tied to `[TOOL_FOCUS]`.
+- Prefer existing codebase patterns and find at least three examples before changing shared patterns.
+- Add or update focused tests when behavior changes.
+- If `[TOOL_VERIFY_COMMAND]` is configured, run it after fixes and keep only improvements that verify against the final scan.
+- Run scoped validation for touched areas.
+- Commit, push, and open one PR against `[TRUNK]`.
+- Do not merge the PR.
+
+Output:
+
+- Report tool command, baseline command if used, verification command if used, focus, findings fixed/skipped, branch, commit, PR URL, validation, blockers, and residual risk.

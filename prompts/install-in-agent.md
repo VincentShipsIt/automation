@@ -10,7 +10,8 @@ Source library:
 - If the library already exists locally, read the local copy instead of fetching.
 
 Goal:
-- Create clean, project-specific loop drafts that can later be pasted into Codex Automations, Claude Desktop scheduled tasks, or Claude remote Routines.
+- Create clean, project-specific loop drafts that can later be pasted into Codex Automations, Claude local routines, or Claude remote Routines.
+- Use the same intent contract for Codex and Claude. The prompt intent, safety boundary, state/dedupe, cadence recommendation, and stopping conditions should match; only the final artifact format should differ.
 - Do not create live schedules, webhooks, recurring jobs, or app automations unless explicitly asked after the drafts are reviewed.
 
 First inspect this project:
@@ -19,24 +20,31 @@ First inspect this project:
 - Find any existing branch/worktree/PR conventions.
 
 Choose surfaces:
-- Use Codex Automation for repo work that should run in the Codex app, especially feature implementation, issue hygiene, Sentry fixes, and codebase maintenance.
-- Use Claude Desktop scheduled tasks for local files, private repos, SSH workers, and Claude Code SKILL.md prompts.
-- Use Claude remote Routines for connector/API-driven work such as GitHub triage, meeting briefs, reading digests, and webhook/API-triggered workflows.
+- Use `codex/automations/local/` for repo work that should run in the Codex app, especially GitHub issue implementation, issue hygiene, Sentry fixes, local validation, and codebase maintenance.
+- Use `codex/automations/remote/` only for future connector-safe Codex remote templates.
+- Use `claude/routines/local/` for local files, private repos, local tools, and Claude Code `SKILL.md` prompts.
+- Use `claude/routines/remote/` for read-only or metadata/API workflows such as GitHub board updates, triage, meeting briefs, reading digests, and webhook/API-triggered workflows.
+- Use `shared/local/` and `shared/remote/` as source prompt bodies before creating platform-specific artifacts.
 
 Create or update:
 - .agents/loops/README.md
-- .agents/loops/shared/
-- .agents/loops/codex/
-- .agents/loops/claude/
+- .agents/loops/shared/local/
+- .agents/loops/shared/remote/
+- .agents/loops/codex/automations/local/
+- .agents/loops/codex/automations/remote/
+- .agents/loops/claude/routines/local/
+- .agents/loops/claude/routines/remote/
 
 Install a small useful starter set:
-- Feature implementation
+- GitHub issue implementation
 - Recent commit review
 - Board hygiene
-- Remote validation or local validation
-- PR quality review
-- Memory review
+- Local validation
+- PR review
 - Worktree prune
+
+Create matching Codex and Claude drafts when the intent has both surfaces. If an
+intent is only safe on one surface, document why instead of forcing symmetry.
 
 For each installed draft, include:
 - Surface
@@ -61,7 +69,8 @@ Rules:
 
 Finish with:
 - Files created or changed.
-- Which routines are ready to paste into Codex or Claude.
+- Which drafts are ready to paste into Codex or Claude.
+- Any intentional Codex/Claude gaps and why.
 - Required setup values still missing.
 - Recommended first manual test.
 ```

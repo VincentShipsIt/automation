@@ -10,7 +10,7 @@ Source library:
 - Prefer local copy if available.
 
 Routine requested:
-- Purpose: [FEATURE_IMPLEMENTATION | RECENT_COMMIT_REVIEW | BACKLOG_PICKUP | BOARD_HYGIENE | TOOL_FIX_PASS | SECURITY_FIX_PASS | REACT_FIX_PASS | DRY_REFACTOR | CLEANUP | REMOTE_VALIDATION | PR_REVIEW | WORKTREE_PRUNE | DOCS_VERIFICATION | BUNDLE_SIZE | E2E_EXPANSION | OTHER]
+- Purpose: [GITHUB_ISSUE_IMPLEMENTATION | RECENT_COMMIT_REVIEW | GITHUB_BACKLOG_PICKUP | BOARD_HYGIENE | SENTRY_HOTFIX | TOOL_FIX_PASS | DRY_REPO | LOCAL_VALIDATION | PR_REVIEW | WORKTREE_PRUNE | DOCS_VERIFICATION | BUNDLE_SIZE_WATCHDOG | NIGHTLY_E2E_EXPANSION | OTHER]
 - Surface preference: [CLAUDE_DESKTOP_SCHEDULED_TASK | CLAUDE_REMOTE_ROUTINE | UNSURE]
 - Project: [PROJECT]
 - Repository: [GITHUB_REPO]
@@ -18,16 +18,18 @@ Routine requested:
 - Trunk branch: [TRUNK]
 - State file or memory location: [STATE_FILE]
 - Out of scope: [OUT_OF_SCOPE_PROJECTS]
+- Validation commands, if any: [VALIDATION_COMMANDS]
 - Remote worker, if any: [REMOTE_WORKER]
 
 Steps:
 1. Read this repo's AGENTS.md, CLAUDE.md, README, package scripts, and existing routine docs.
-2. Decide the correct surface before writing the prompt.
-3. Choose the closest template from claude/scheduled-tasks/ or shared/claude/.
-4. Fill placeholders from verified repo facts.
-5. Keep unknowns as [PLACEHOLDER] and list them under Required Setup.
-6. Include setup, connectors/tools, trigger, state/dedupe, safe writes, forbidden actions, prompt, output, failure mode, and manual test.
-7. Keep destructive actions behind explicit approval.
+2. Decide the correct surface before writing the prompt. Prefer Desktop scheduled tasks for code/test execution and remote Routines for read-only or GitHub metadata/API workflows.
+3. Choose the closest template from `claude/routines/local/`, `claude/routines/remote/`, `shared/local/claude/`, or `shared/remote/claude/`.
+4. Keep the same intent contract as the matching Codex automation when one exists; only the Claude artifact shape should differ.
+5. Fill placeholders from verified repo facts.
+6. Keep unknowns as [PLACEHOLDER] and list them under Required Setup.
+7. Include setup, connectors/tools, trigger, state/dedupe, safe writes, forbidden actions, prompt, output, failure mode, and manual test.
+8. Keep destructive actions behind explicit approval.
 
 Do not create or enable the live schedule unless explicitly asked. If live scheduled-task tools are available and the user asks to create it, start disabled or paused when possible.
 

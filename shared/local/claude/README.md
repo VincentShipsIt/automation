@@ -29,6 +29,7 @@ Claude code review, code-building, and validation templates that need Claude Opu
 | `bundle-size-watchdog.md` | Desktop scheduled task | Monitor dependency/build artifact size | Daily or weekly |
 | `nightly-e2e-expansion.md` | Desktop scheduled task | Add exactly one nightly e2e spec | Nightly or weekly |
 | `repo-hygiene-cleanup.md` | Desktop scheduled task | Safe multi-repo hygiene check with no code changes by default | Weekly |
+| `memory-review.md` | Desktop scheduled task | Refresh repo memory against current source truth and PR corrections | Weekly |
 
 ## Common Claude Prompt Rules
 
@@ -55,6 +56,7 @@ Routine-specific:
 - `[REPO_PATH_1]`/`[REPO_PATH_2]`, `[GITHUB_REPO_1]`/`[GITHUB_REPO_2]` (multi-repo).
 - bundle-size-watchdog: `[DEPENDENCY_DIR]`, `[ARTIFACT_PATH_1]`, `[ARTIFACT_PATH_2]`, `[MAX_DEPENDENCY_SIZE]`, `[MAX_PACKAGE_COUNT]`, `[MAX_ARTIFACT_SIZE]`.
 - docs-verification: `[DOC_SCOPE]`, `[DOC_FILE_1]`, `[DOC_FILE_2]`, `[DOC_FILE_3]`, `[SOURCE_PATH_1]`, `[SOURCE_PATH_2]`, `[SOURCE_PATH_3]`.
+- memory-review: `[MEMORY_SCOPE]` - repo memory files or globs memory-review may edit, such as `AGENTS.md`, `CLAUDE.md`, or `.agents/memory/`.
 
 The canonical local-repo-path token is `[REPO_PATH]` (not `[LOCAL_REPO_PATH]` or `[ABSOLUTE_REPO_PATH]`).
 The canonical tool-invocation token is `[TOOL_COMMAND]` (not `[TOOL_NAME]`).

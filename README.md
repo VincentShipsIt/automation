@@ -78,11 +78,14 @@ This repo is organized by platform and execution surface:
    - Codex PR review: `codex/automations/local/pr-review/automation.toml`
    - Codex tool fix pass: `codex/automations/local/tool-fix-pass/automation.toml`
    - Codex local validation: `codex/automations/local/local-validation/automation.toml`
+   - Codex weekly memory review: `codex/automations/local/memory-review/automation.toml`
+   - Codex loop discovery: `codex/automations/local/loop-discovery/automation.toml`
    - Claude local GitHub issue work: `claude/routines/local/github-issue-implementation/SKILL.md`
    - Claude recent commit review/fix: `claude/routines/local/recent-commit-review/SKILL.md`
    - Claude Sentry fix loop: `claude/routines/local/sentry-hotfix/SKILL.md`
    - Claude local validation: `claude/routines/local/local-validation/SKILL.md`
    - Claude PR review: `claude/routines/local/pr-review/SKILL.md`
+   - Claude weekly memory review: `claude/routines/local/memory-review/SKILL.md`
    - Claude remote board hygiene: `claude/routines/remote/board-hygiene.md`
 
 3. Replace every placeholder:

@@ -19,6 +19,8 @@ These are clean templates, not raw exports. They intentionally do not include pr
 - `nightly-e2e-expansion/automation.toml` - add exactly one focused nightly e2e spec.
 - `worktree-prune/automation.toml` - remove only clean, provably merged local worktrees when enabled.
 - `content-factory-maintenance/automation.toml` - improve a prompt, skill, template, docs, or evaluation pipeline.
+- `memory-review/automation.toml` - review repo memory against current source truth and open safe correction PRs.
+- `loop-discovery/automation.toml` - inspect a codebase for evidence-backed loop candidates without writing files.
 - `memory-template/memory.md` - support file for Codex automation state, not a runnable automation.
 
 ## Placeholder Key

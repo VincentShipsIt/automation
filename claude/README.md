@@ -24,6 +24,7 @@ Use `../shared/local/claude/` for sanitized shared templates derived from local 
 - `../shared/local/claude/docs-verification.md`
 - `../shared/local/claude/bundle-size-watchdog.md`
 - `../shared/local/claude/nightly-e2e-expansion.md`
+- `../shared/local/claude/memory-review.md`
 
 Use `../shared/remote/claude/` for connector-safe remote Routine source prompts.
 

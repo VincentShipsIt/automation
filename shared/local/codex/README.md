@@ -23,6 +23,8 @@ through the Codex app or Codex automation tools, then paste the relevant prompt.
 | `nightly-e2e-expansion.md` | Add exactly one focused nightly e2e spec | `worktree` | `xhigh` |
 | `worktree-prune.md` | Remove only clean, provably merged local worktrees when enabled | `local` | `medium` |
 | `content-factory-maintenance.md` | Improve a prompt, skill, template, docs, or evaluation pipeline | `worktree` | `low` or `medium` |
+| `memory-review.md` | Refresh repo memory against current source truth | `worktree` | `xhigh` |
+| `loop-discovery.md` | Find evidence-backed loop candidates in a target codebase | `local` | `medium` |
 
 ## Support Files
 
@@ -66,6 +68,9 @@ through the Codex app or Codex automation tools, then paste the relevant prompt.
 - `[SOURCE_PATH_1]`, `[SOURCE_PATH_2]`, `[SOURCE_PATH_3]` - source files checked by docs verification.
 - `[DEPENDENCY_DIR]`, `[ARTIFACT_PATH_1]`, `[ARTIFACT_PATH_2]` - size watchdog targets.
 - `[MAX_DEPENDENCY_SIZE]`, `[MAX_PACKAGE_COUNT]`, `[MAX_ARTIFACT_SIZE]` - size watchdog thresholds.
+- `[MEMORY_SCOPE]` - repo memory files or globs memory-review may edit, such as `AGENTS.md`, `CLAUDE.md`, or `.agents/memory/`.
+- `[LOOP_LIBRARY_PATH]` - absolute path to the loops library used by loop-discovery for duplicate checks and candidate fit.
+- `[LOOP_LIBRARY_REPO]` - `owner/repo` for the loops library used by loop-discovery.
 
 ## Tool Fix Presets
 

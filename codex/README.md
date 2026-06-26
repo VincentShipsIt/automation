@@ -19,6 +19,8 @@ Use `../shared/local/codex/` for clean shared templates derived from working Cod
 - `../shared/local/codex/nightly-e2e-expansion.md`
 - `../shared/local/codex/worktree-prune.md`
 - `../shared/local/codex/content-factory-maintenance.md`
+- `../shared/local/codex/memory-review.md`
+- `../shared/local/codex/loop-discovery.md`
 - `../shared/local/codex/memory.md`
 
 ## Surface Folders

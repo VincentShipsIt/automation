@@ -31,7 +31,7 @@ work together: the token drives the high-effort run.
 Templates that carry the trigger (code review + code building + validation):
 github-issue-implementation, github-backlog-pickup, recent-commit-review, sentry-hotfix,
 pr-review, tool-fix-pass, dry-repo, nightly-e2e-expansion,
-docs-verification, bundle-size-watchdog, local-validation.
+docs-verification, bundle-size-watchdog, local-validation, memory-review.
 Pure hygiene tasks (board-hygiene, worktree-prune, repo-hygiene-cleanup) intentionally omit it.
 
 ## Templates
@@ -51,6 +51,7 @@ Pure hygiene tasks (board-hygiene, worktree-prune, repo-hygiene-cleanup) intenti
 - `bundle-size-watchdog/`
 - `nightly-e2e-expansion/`
 - `repo-hygiene-cleanup/`
+- `memory-review/`
 
 ## Suggested Cadence
 
@@ -71,6 +72,7 @@ Claude stores schedule settings in the app, not in these `SKILL.md` prompt files
 | `worktree-prune`, `repo-hygiene-cleanup` | Daily or weekly. |
 | `docs-verification`, `bundle-size-watchdog` | Weekly or after relevant large changes. |
 | `nightly-e2e-expansion` | Nightly or weekly. |
+| `memory-review` | Weekly, or after large source/schema changes. |
 
 ## Placeholder Key
 

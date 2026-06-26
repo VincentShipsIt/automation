@@ -16,8 +16,7 @@ Workflow:
 - Inspect open issues, labels, milestones, open/merged PRs, branches, worktrees, and project fields.
 - Do not create duplicate issues, board cards, fix branches, or PRs.
 - Search by issue URL, title, normalized title slug, branch name, and PR references before adding or updating any board item.
-- Use [TRUNK] as the base branch if repo edits are needed.
-- Keep this run metadata-first. Only edit repository files when the board cleanup explicitly requires it.
+- This automation is GitHub metadata only. Do not create local worktrees, branches, commits, pull requests, source edits, or repo file changes.
 
 Board hygiene tasks:
 - Ensure every open issue is represented once on the canonical board.

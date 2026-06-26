@@ -25,6 +25,8 @@ These are clean templates, not raw exports. They intentionally do not include pr
 - `[STATE_FILE]` - file or automation memory location for durable loop state.
 - `[OUT_OF_SCOPE_PROJECTS]` - projects this automation must not inspect.
 - `[REMOTE_VALIDATION_WORKER]` - optional remote worker for heavy checks.
+- `[SENTRY_ORG]` - Sentry organization slug used by sentry-hotfix and similar templates.
+- `[SENTRY_PROJECTS]` - comma-separated Sentry project slugs to query for unresolved issues.
 
 ## Safety Rules
 

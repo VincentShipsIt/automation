@@ -35,6 +35,7 @@ Install a small useful starter set:
 - Board hygiene
 - Remote validation or local validation
 - PR quality review
+- Memory review
 - Worktree prune
 
 For each installed draft, include:

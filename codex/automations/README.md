@@ -11,6 +11,7 @@ These are clean templates, not raw exports. They intentionally do not include pr
 - `board-hygiene/automation.toml` - keep GitHub issues and project fields clean without duplicate work.
 - `sentry-hotfix/automation.toml` - inspect unresolved Sentry errors and open safe fix PRs.
 - `content-factory-maintenance/automation.toml` - improve a recurring content, docs, or skill pipeline.
+- `memory-review/automation.toml` - review repo memory against current source truth and open safe correction PRs.
 - `loop-discovery/automation.toml` - inspect a codebase for evidence-backed loop candidates without writing files.
 - `memory-template/memory.md` - clean memory structure for Codex automation state.
 
@@ -26,6 +27,7 @@ These are clean templates, not raw exports. They intentionally do not include pr
 - `[TRUNK]` - trunk branch, usually `main` or `master`.
 - `[BRANCH_PREFIX]` - safe branch prefix, such as `codex/feature`.
 - `[STATE_FILE]` - file or automation memory location for durable loop state.
+- `[MEMORY_SCOPE]` - repo memory files or globs this automation may edit, such as `AGENTS.md`, `CLAUDE.md`, or `.agents/memory/`.
 - `[OUT_OF_SCOPE_PROJECTS]` - projects this automation must not inspect.
 - `[REMOTE_VALIDATION_WORKER]` - optional remote worker for heavy checks.
 

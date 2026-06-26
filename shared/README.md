@@ -16,6 +16,7 @@ shared/
     recent-commit-review.md
     sentry-hotfix.md
     content-factory-maintenance.md
+    memory-review.md
     memory.md
   claude/
     README.md
@@ -31,6 +32,7 @@ shared/
     pr-quality-review.md
     worktree-prune.md
     docs-verification.md
+    memory-review.md
     bundle-size-watchdog.md
     nightly-e2e-expansion.md
 ```

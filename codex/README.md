@@ -11,6 +11,7 @@ Use `../shared/codex/` for clean shared templates derived from working Codex aut
 - `../shared/codex/recent-commit-review.md`
 - `../shared/codex/sentry-hotfix.md`
 - `../shared/codex/content-factory-maintenance.md`
+- `../shared/codex/memory-review.md`
 - `../shared/codex/loop-discovery.md`
 - `../shared/codex/memory.md`
 
@@ -29,6 +30,7 @@ The template set includes:
 - Board hygiene
 - Sentry hotfix
 - Content factory maintenance
+- Memory review
 - Loop discovery
 - Memory template
 

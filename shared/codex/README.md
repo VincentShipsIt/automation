@@ -15,6 +15,7 @@ through the Codex app or Codex automation tools, then paste the relevant prompt.
 | `recent-commit-review.md` | Review recent trunk commits and fix high-confidence issues | `worktree` | `xhigh` |
 | `sentry-hotfix.md` | Fix unresolved production errors safely | `worktree` | `xhigh` |
 | `content-factory-maintenance.md` | Improve a recurring content/skill pipeline | `worktree` | `low` or `medium` |
+| `memory-review.md` | Refresh repo memory against current source truth | `worktree` | `xhigh` |
 | `loop-discovery.md` | Find evidence-backed loop candidates in a target codebase | `local` | `medium` |
 | `memory.md` | Keep run memory short and dedupe-aware | n/a | n/a |
 
@@ -40,6 +41,7 @@ through the Codex app or Codex automation tools, then paste the relevant prompt.
 - `[TRUNK]` - `main` or `master`.
 - `[BRANCH_PREFIX]` - short safe branch prefix, such as `codex/feature`.
 - `[STATE_FILE]` - file or automation memory location for durable loop state.
+- `[MEMORY_SCOPE]` - repo memory files or globs the automation may edit, such as `AGENTS.md`, `CLAUDE.md`, or `.agents/memory/`.
 - `[OUT_OF_SCOPE_PROJECTS]` - comma-separated project names the run must not inspect.
 - `[SENTRY_ORG]` - Sentry organization slug used by sentry-hotfix and similar templates.
 - `[SENTRY_PROJECTS]` - comma-separated Sentry project slugs to query for unresolved issues.

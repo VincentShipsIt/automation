@@ -31,7 +31,7 @@ work together: the token drives the high-effort run.
 Templates that carry the trigger (code review + code building + remote validation):
 feature-implementation, backlog-pickup-ultracode, recent-commit-review-ultracode, pr-quality-review,
 tool-fix-pass, security-fix-pass, react-fix-pass, dry-refactor, cleanup-simplification,
-nightly-e2e-expansion, docs-verification, bundle-size-watchdog, continuous-testing-remote.
+nightly-e2e-expansion, docs-verification, memory-review, bundle-size-watchdog, continuous-testing-remote.
 Pure hygiene tasks (board-hygiene, worktree-prune, repo-hygiene-cleanup) intentionally omit it.
 
 ## Templates
@@ -50,6 +50,7 @@ Pure hygiene tasks (board-hygiene, worktree-prune, repo-hygiene-cleanup) intenti
 - `pr-quality-review/`
 - `worktree-prune/`
 - `docs-verification/`
+- `memory-review/`
 - `bundle-size-watchdog/`
 - `nightly-e2e-expansion/`
 - `repo-hygiene-cleanup/`
@@ -62,6 +63,7 @@ Pure hygiene tasks (board-hygiene, worktree-prune, repo-hygiene-cleanup) intenti
 - `[TRUNK]` - trunk branch, usually `main` or `master`.
 - `[BRANCH_PREFIX]` - safe branch prefix.
 - `[STATE_FILE]` - file or scheduled task memory location for durable loop state.
+- `[MEMORY_SCOPE]` - repo memory files or globs this task may edit, such as `AGENTS.md`, `CLAUDE.md`, or `.agents/memory/`.
 - `[OUT_OF_SCOPE_PROJECTS]` - projects this task must not inspect.
 - `[REMOTE_WORKER]` - optional remote worker name.
 - `[REMOTE_REPO_PATH]` - repository path on the remote worker.

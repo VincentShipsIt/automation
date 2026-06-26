@@ -23,7 +23,7 @@ Read this project's AGENTS.md, CLAUDE.md, README, package scripts, existing auto
 - codex/
 - claude/
 
-Install a small useful starter set: feature implementation, board hygiene, validation, PR quality review, and worktree pruning.
+Install a small useful starter set: feature implementation, board hygiene, validation, PR quality review, memory review, and worktree pruning.
 
 For each draft include: surface, trigger, connectors/tools, state/dedupe, safe writes, forbidden actions, prompt, output, failure mode, and manual test before enabling.
 
@@ -49,9 +49,11 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
    - Codex recent commit review/fix: `codex/automations/recent-commit-review/automation.toml`
    - Codex board cleanup: `codex/automations/board-hygiene/automation.toml`
    - Codex Sentry fix loop: `codex/automations/sentry-hotfix/automation.toml`
+   - Codex weekly memory review: `codex/automations/memory-review/automation.toml`
    - Codex loop discovery: `codex/automations/loop-discovery/automation.toml`
    - Claude local feature work: `claude/scheduled-tasks/feature-implementation/SKILL.md`
    - Claude recent commit review/fix: `claude/scheduled-tasks/recent-commit-review-ultracode/SKILL.md`
+   - Claude weekly memory review: `claude/scheduled-tasks/memory-review/SKILL.md`
    - Claude remote validation: `claude/scheduled-tasks/continuous-testing-remote/SKILL.md`
    - Claude PR review: `claude/scheduled-tasks/pr-quality-review/SKILL.md`
 
@@ -65,6 +67,7 @@ Use Claude remote Routines when the task is mostly connector/API driven: GitHub 
    - `[TRUNK]`
    - `[BRANCH_PREFIX]`
    - `[STATE_FILE]`
+   - `[MEMORY_SCOPE]`
    - `[OUT_OF_SCOPE_PROJECTS]`
    - `[REMOTE_WORKER]` if used
 
@@ -112,7 +115,9 @@ For autonomous engineering work, start with these:
 - `codex/automations/feature-implementation/automation.toml`
 - `codex/automations/recent-commit-review/automation.toml`
 - `codex/automations/board-hygiene/automation.toml`
+- `codex/automations/memory-review/automation.toml`
 - `claude/scheduled-tasks/continuous-testing-remote/SKILL.md`
+- `claude/scheduled-tasks/memory-review/SKILL.md`
 - `claude/scheduled-tasks/pr-quality-review/SKILL.md`
 - `claude/scheduled-tasks/worktree-prune/SKILL.md`
 

@@ -1,6 +1,6 @@
 ---
 name: loop-writer
-description: Draft, audit, repair, or adapt Codex Automation, Claude Routine, Claude Desktop scheduled task, and shared AI-agent loop templates in the VincentShipsIt/loops repo. Use when the user asks to create a loop, improve a routine or automation prompt, convert an existing workflow into a reusable loop, audit loop safety, or prepare templates under codex/, claude/, shared/, prompts/, or skills/.
+description: Draft, audit, repair, adapt, or discover Codex Automation, Claude Routine, Claude Desktop scheduled task, and shared AI-agent loop templates in the VincentShipsIt/loops repo. Use when the user asks to create a loop, improve a routine or automation prompt, mine a codebase for reusable loop candidates, convert an existing workflow into a reusable loop, audit loop safety, or prepare templates under codex/, claude/, shared/, prompts/, or skills/.
 ---
 
 # Loop Writer
@@ -16,6 +16,7 @@ Use this skill to write clean, bounded loop templates for this repository.
    - Shared prompt only: `shared/README.md`.
 3. For loop-design standards, read `shared/forward-future-loop-library.md`.
 4. For stricter authoring criteria, read `references/loop-contract.md`.
+5. For codebase-to-loop discovery requests, read `references/loop-discovery.md`.
 
 When live catalog comparison is needed, use the existing Forward Future skill instead of duplicating it:
 
@@ -30,6 +31,15 @@ npx skills add Forward-Future/loop-library --skill loop-library -g
 - Use Claude remote Routines for connector/API-driven work.
 - Use `shared/` for reusable source prompts before creating app-specific files.
 
+## Loop Discovery
+
+When the user wants to explore a codebase for new loop ideas, keep the first pass read-only:
+
+- Use `prompts/discover-codebase-loops.md` for a one-off agent prompt.
+- Use `shared/codex/loop-discovery.md` or `codex/automations/loop-discovery/automation.toml` for a Codex app Automation draft.
+- Compare target-codebase evidence against this loop library before recommending a new template.
+- Do not create new loop files, live schedules, branches, pull requests, or webhooks during discovery unless the user explicitly asks for the authoring step after reviewing candidates.
+
 ## Naming Rules
 
 - Keep Codex names literal and product-neutral: `recent-commit-review`, `sentry-hotfix`, `board-hygiene`.
@@ -38,7 +48,7 @@ npx skills add Forward-Future/loop-library --skill loop-library -g
 - Keep placeholders generic. Universal tokens: `[PROJECT]`, `[REPO_PATH]`, `[GITHUB_REPO]`, `[TRUNK]`,
   `[BRANCH_PREFIX]`, `[STATE_FILE]`, `[OUT_OF_SCOPE_PROJECTS]`. Routine-specific tokens also exist
   (e.g. `[PROJECT_BOARD]`, `[REVIEW_MARKER]`, `[TOOL_COMMAND]`, `[AUTOMATION_ASSIGNEE]`,
-  `[ALLOW_SAFE_DELETES]`). Canonical local path = `[REPO_PATH]`; canonical tool invocation =
+  `[ALLOW_SAFE_DELETES]`, `[LOOP_LIBRARY_PATH]`, `[LOOP_LIBRARY_REPO]`). Canonical local path = `[REPO_PATH]`; canonical tool invocation =
   `[TOOL_COMMAND]`; multi-repo routines use `[REPO_PATH_1]`/`[GITHUB_REPO_1]` etc. Source of truth:
   `claude/scheduled-tasks/README.md` Placeholder Key and `shared/claude/README.md` Placeholder Key.
 

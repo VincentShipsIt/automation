@@ -14,6 +14,8 @@ Safe writes: Edit only files in `[MEMORY_SCOPE]`, update `[STATE_FILE]`, push on
 
 Forbidden actions: Do not edit source code to make memory true. Do not merge PRs, deploy, run production migrations, write production data, print secrets, or inspect `[OUT_OF_SCOPE_PROJECTS]`.
 
+Output: Baseline SHA, reviewed head SHA, memory files reviewed, source-of-truth evidence checked, stale claims found, changes made, branch/PR if created, validation run, baseline update status, skipped work, blockers, and residual risk.
+
 Failure mode: Stop without writing when the baseline is invalid, source truth is ambiguous, the repo is dirty in an unsafe way, validation cannot run, or an equivalent memory-review PR already exists.
 
 Manual test before enabling: Run once with scheduling disabled. Confirm the run either no-ops with a source-backed report or opens at most one PR touching only `[MEMORY_SCOPE]`.

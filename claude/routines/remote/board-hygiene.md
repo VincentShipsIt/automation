@@ -6,6 +6,7 @@ Connectors/tools: GitHub repository and project board
 State/dedupe: use `[STATE_FILE]` when available; otherwise dedupe by issue URL, project item ID, title slug, linked PR, and branch name
 Safe writes: GitHub issue metadata, issue body formatting, labels, milestones, and project fields only
 Forbidden actions: local filesystem access, source edits, branches, commits, PRs, merges, deploys, production writes, destructive cleanup
+Failure mode: stop and report blocked when connector access, board identity, or safe evidence is missing
 Manual test before enabling: run once against a small project board and verify every proposed metadata change is evidence-backed
 
 ## Prompt

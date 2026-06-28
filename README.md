@@ -97,6 +97,7 @@ This repo is organized by platform and execution surface:
    - `[BRANCH_PREFIX]`
    - `[STATE_FILE]`
    - `[VALIDATION_COMMANDS]` if used
+   - `[WEEKLY_MILESTONE_PATTERN]` if used
    - `[OUT_OF_SCOPE_PROJECTS]`
    - `[REMOTE_WORKER]` if used
 

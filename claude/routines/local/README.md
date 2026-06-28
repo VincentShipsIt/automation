@@ -86,6 +86,7 @@ Claude stores schedule settings in the app, not in these `SKILL.md` prompt files
 - `[VALIDATION_COMMANDS]` - explicit local validation commands to run sequentially.
 - `[REMOTE_WORKER]` - optional remote worker name for code-writing tasks that explicitly support offloading heavy checks.
 - `[PROJECT_BOARD]` - canonical issue/project board (e.g. a GitHub Projects board).
+- `[WEEKLY_MILESTONE_PATTERN]` - the repo's existing milestone naming/date pattern used to identify or create the current weekly deliverable (e.g. `Week of YYYY-MM-DD` or `Sprint NN`).
 - `[REVIEW_MARKER]` - hidden marker string this routine writes into its own review comments so it can
   detect already-reviewed PRs (e.g. an HTML comment like `<!-- routine:pr-review -->`).
 - `[TOOL_COMMAND]` - command this routine runs (linter/scanner/test script), e.g. `bun run lint`.

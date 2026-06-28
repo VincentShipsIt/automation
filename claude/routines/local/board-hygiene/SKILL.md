@@ -1,28 +1,57 @@
 ---
 name: board-hygiene
-description: Keep GitHub issues and project board fields clean
+description: Weekly GitHub board readiness audit and metadata repair
 ---
 
-Clean up `[PROJECT]` issue and board metadata without creating duplicate work.
+Audit and repair `[PROJECT]` GitHub project board, milestones, priorities, and
+weekly deliverables, then answer whether the board is ready for weekly execution.
+
+Goal:
+- Answer and enforce: "Is the board ready for weekly execution? Does every open
+  actionable issue have a board item, Status, Priority, and Milestone? Are
+  last-week goals completed, carried forward, or explicitly blocked?"
 
 Scope:
 - Work only on `[GITHUB_REPO]` and `[PROJECT_BOARD]`.
 - Local repository path: `[REPO_PATH]`.
 - Do not inspect, modify, summarize, or report on `[OUT_OF_SCOPE_PROJECTS]`.
 
-Workflow:
-- Read local agent instructions and label/issue guidance.
-- Inspect open issues, labels, milestones, open/merged PRs, branches, worktrees, and project fields.
-- Search by issue URL, title, normalized title, branch name, and PR references before adding or updating anything.
-- Ensure every open issue is represented once on the canonical board.
-- Remove or archive duplicate board cards.
-- Normalize type, status, priority, milestone, and labels only when evidence supports the change.
+Board identity:
+- Read local agent instructions, project memory, and planning docs.
+- Determine the canonical board from existing issue project items, repo/org projects, and linked planning docs.
+- If board identity is ambiguous, stop and report it as a blocker instead of guessing.
+
+Required audit:
+- List all open issues, active board items, and active milestones.
+- Identify the current weekly deliverable milestone.
+- Identify last-week goals from milestones, project fields, planning docs, issue comments, merged PRs, branches, or board activity.
+- For every open actionable issue, verify it is on the canonical board with Status, Priority, and Milestone set.
+- For every active board item, verify the backing issue is open/relevant, Status matches evidence, Priority exists, and Milestone matches the current or next weekly deliverable.
+- Identify stale In Progress items, merged work not moved to Done, duplicate cards, and open issues missing from the board.
+
+Repair policy:
+- Search by issue URL, title, normalized title slug, branch name, and PR references before adding or updating anything.
+- Apply safe GitHub metadata fixes directly: add missing actionable issues to the board, set missing Status/Priority/Milestone when evidence is clear.
+- Remove or archive duplicate board cards, keeping the canonical issue card.
+- Move merged/completed work to Done.
+- Carry unfinished last-week goals into the current or next weekly milestone when clear.
+- Create or update the current weekly milestone only if the repo's existing naming/date pattern (`[WEEKLY_MILESTONE_PATTERN]`) makes it obvious.
 - Keep labels concise and avoid duplicating project fields with labels.
 - Keep titles board-readable while preserving nuance in the body.
-- Move active, blocked, completed, merged, and deferred work based on evidence.
-- Flag uncertain items instead of guessing.
+- If metadata cannot be decided from evidence, leave it unchanged and report the exact blocker.
 
-Do not create branches, commits, or PRs unless the board cleanup explicitly requires repository edits.
+Do not create branches, commits, or PRs. This audit is GitHub metadata only.
 
-Output:
-- Summarize changed issues/cards, duplicate cleanup, field changes, status moves, uncertain items, and skipped work.
+Final answer format:
+- Ready: yes/no
+- Canonical board
+- Current weekly deliverable milestone
+- Last-week goals found
+- Completed goals
+- Carried-forward goals
+- Missing board items fixed
+- Missing Status fixed
+- Missing Priority fixed
+- Missing Milestone fixed
+- Remaining blockers
+- Exact issues still preventing Ready: yes

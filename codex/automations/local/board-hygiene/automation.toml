@@ -1,9 +1,12 @@
 version = 1
 id = "[AUTOMATION_ID]-board-hygiene"
 kind = "cron"
-name = "Board Hygiene - [PROJECT]"
+name = "Board Weekly Readiness - [PROJECT]"
 prompt = """
-Clean up this repository's GitHub issue board and keep issues current without creating duplicate work.
+Audit and repair this repository's GitHub project board, milestones, priorities, and weekly deliverables, then answer whether the board is ready for weekly execution.
+
+Goal:
+- Answer and enforce: "Is the board ready for weekly execution? Does every open actionable issue have a board item, Status, Priority, and Milestone? Are last-week goals completed, carried forward, or explicitly blocked?"
 
 Repository policy:
 - This automation is scoped only to [PROJECT]: [REPO_PATH].
@@ -11,27 +14,46 @@ Repository policy:
 - Canonical project board: [PROJECT_BOARD].
 - Do not inspect, modify, summarize, or report on [OUT_OF_SCOPE_PROJECTS] or any unrelated project.
 
-Workflow:
-- Read local agent instructions and project memory before changing metadata.
-- Inspect open issues, labels, milestones, open/merged PRs, branches, worktrees, and project fields.
-- Do not create duplicate issues, board cards, fix branches, or PRs.
-- Search by issue URL, title, normalized title slug, branch name, and PR references before adding or updating any board item.
+Board identity:
+- Read local agent instructions, project memory, and planning docs before changing metadata.
+- Determine the canonical board from existing issue project items, repo/org projects, and linked planning docs.
+- If board identity is ambiguous, stop and report it as a blocker instead of guessing.
+
+Required audit:
+- List all open issues, active board items, and active milestones.
+- Identify the current weekly deliverable milestone.
+- Identify last-week goals from milestones, project fields, planning docs, issue comments, merged PRs, branches, or board activity.
+- For every open actionable issue, verify it is on the canonical board with Status, Priority, and Milestone set.
+- For every active board item, verify the backing issue is open/relevant, Status matches evidence, Priority exists, and Milestone matches the current or next weekly deliverable.
+- Identify stale In Progress items, merged work not moved to Done, duplicate cards, and open issues missing from the board.
+
+Repair policy:
 - This automation is GitHub metadata only. Do not create local worktrees, branches, commits, pull requests, source edits, or repo file changes.
-
-Board hygiene tasks:
-- Ensure every open issue is represented once on the canonical board.
+- Search by issue URL, title, normalized title slug, branch name, and PR references before adding or updating any board item.
+- Apply safe GitHub metadata fixes directly: add missing actionable issues to the board, set missing Status/Priority/Milestone when evidence is clear.
 - Remove or archive duplicate board cards, keeping the canonical issue card.
-- Normalize type, status, priority, milestone, and labels only when supported by issue text, comments, PRs, branches, or board evidence.
+- Move merged/completed work to Done.
+- Carry unfinished last-week goals into the current or next weekly milestone when clear.
+- Create or update the current weekly milestone only if the repo's existing naming/date pattern ([WEEKLY_MILESTONE_PATTERN]) makes it obvious.
 - Keep labels concise and avoid duplicating project fields with labels.
-- Keep issue titles short and board-readable when the body preserves nuance.
-- Move active, blocked, completed, merged, and deferred work to the appropriate status based on evidence.
-- Flag uncertain items instead of guessing.
+- If metadata cannot be decided from evidence, leave it unchanged and report the exact blocker.
 
-Output expectations:
-- Summarize changed issues/cards, duplicate cleanup, field/label/title/body changes, status moves, uncertain items, and skipped work.
+Final answer format:
+- Ready: yes/no
+- Canonical board
+- Current weekly deliverable milestone
+- Last-week goals found
+- Completed goals
+- Carried-forward goals
+- Missing board items fixed
+- Missing Status fixed
+- Missing Priority fixed
+- Missing Milestone fixed
+- Remaining blockers
+- Exact issues still preventing Ready: yes
 """
 status = "PAUSED"
-rrule = "RRULE:FREQ=HOURLY;INTERVAL=6;BYMINUTE=45;BYDAY=MO,TU,WE,TH,FR"
+rrule = "RRULE:FREQ=WEEKLY;BYDAY=MO;BYHOUR=8;BYMINUTE=45"
 model = "gpt-5.5"
 reasoning_effort = "low"
 execution_environment = "local"

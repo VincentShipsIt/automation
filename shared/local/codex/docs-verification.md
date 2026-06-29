@@ -21,7 +21,6 @@ Scope:
 
 Workflow:
 
-- Run in the Codex worktree execution environment.
 - Run `git fetch --all --prune`.
 - Base work from latest `origin/[TRUNK]`.
 - Verify documentation claims against source, not assumptions.

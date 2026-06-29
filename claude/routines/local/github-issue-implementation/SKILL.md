@@ -5,7 +5,7 @@ description: Ship one ready GitHub issue to a pull request
 
 ultracode
 
-Implement one ready, high-value GitHub issue in `[PROJECT]` without creating duplicate work.
+Implement one ready, high-value GitHub issue in `[PROJECT]`.
 
 CPU-heavy validation policy:
 - Do not run CPU-intensive tests or heavy validation locally.

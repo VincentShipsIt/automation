@@ -30,8 +30,8 @@ Scope:
 Board identity:
 
 - Determine the canonical board from existing issue project items, repo/org
-  projects, and planning docs already linked from the repo.
-- If board identity is ambiguous, stop and report it as a blocker instead of guessing.
+  projects, and planning docs linked from the repo.
+- If board identity is ambiguous, stop and report it as a blocker.
 
 Required audit:
 
@@ -52,7 +52,7 @@ Repair policy:
 - Move merged/completed work to Done.
 - Carry unfinished last-week goals into the current or next weekly milestone when clear.
 - Create or update the current weekly milestone only if the repo's existing naming/date pattern (`[WEEKLY_MILESTONE_PATTERN]`) makes it obvious.
-- Search by issue URL, project item ID, title, normalized title slug, linked PRs, and branch names before adding or updating any board item, so no duplicate issue or card is created.
+- Search by issue URL, project item ID, title, normalized title slug, linked PRs, and branch names before adding or updating any board item.
 - If metadata cannot be decided from evidence, leave it unchanged and report the exact blocker.
 
 Final answer format:
@@ -70,5 +70,5 @@ Final answer format:
 - Remaining blockers
 - Exact issues still preventing Ready: yes
 
-If no safe metadata work exists, still produce the readiness report and say so.
+If no safe metadata work exists, produce the readiness report and say so.
 Execute this routine now.

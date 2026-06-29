@@ -20,7 +20,6 @@ Scope:
 
 Workflow:
 
-- Run in the Codex worktree execution environment.
 - Run `git fetch --all --prune`.
 - Base work from latest `origin/[TRUNK]`.
 - Search for one clear low-risk simplification target: duplicated logic, redundant branches, unnecessary indirection, stale comments, duplicate config, or obvious unreachable code.

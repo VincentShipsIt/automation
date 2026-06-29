@@ -24,7 +24,7 @@ Worktree hard gate:
 - Stop if pwd resolves to the source checkout.
 - Run git fetch --all --prune before creating any branch or commit.
 - Base work from latest origin/[TRUNK].
-- Create a descriptive branch after choosing the area, formatted like [BRANCH_PREFIX]-e2e-YYYYMMDD-HHMMSS.
+- Create a branch after choosing the area, formatted like [BRANCH_PREFIX]-e2e-YYYYMMDD-HHMMSS.
 
 Discovery:
 - Read local agent instructions, current nightly spec lists, existing e2e tests, routes, controllers, services, serializers, guards, DTOs, seed data, and expected statuses.

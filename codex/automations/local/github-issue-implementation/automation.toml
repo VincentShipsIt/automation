@@ -11,14 +11,21 @@ Repository and board policy:
 - Canonical project board: [PROJECT_BOARD].
 - Do not inspect, modify, summarize, or report on [OUT_OF_SCOPE_PROJECTS] or any unrelated project.
 - Use [TRUNK] as the sole trunk/base branch. Open pull requests against [TRUNK] only.
+- `codex:automation` is the Codex queue label; `claude:routine` is the Claude routine queue label.
+- `claude:routines` is a stale plural variant, not a canonical queue label. Use `claude:routine` unless a target repo explicitly documents the plural label.
+- `shipcode:agent:codex` and `shipcode:agent:claude` are ShipCode routing only. Do not treat either as a generic intake signal outside ShipCode-specific logic.
 
 Work selection:
 - Inspect the canonical project board, open issues, open pull requests, local branches, and git worktrees before choosing work.
 - Choose exactly one issue whose status is ready to start and whose priority, milestone, and scope are clear.
-- Prioritize the highest priority safe issue first, then older high-confidence issues.
+- Rank eligible issues in this order: queue label (`codex:automation`), milestone, target/release/start date, project Priority, then readiness (acceptance criteria, verification scope, and confidence).
+- Prefer ready `codex:automation` issues before unlabeled/non-automation work.
+- Do not give `shipcode:agent:codex` or `shipcode:agent:claude` any selection weight unless this run is explicitly scoped to ShipCode.
+- Do not give stale `claude:routines` any selection weight unless target repo policy explicitly documents that plural label.
 - Skip backlog, deferred, in-progress, blocked, human-review, and done items.
 - Skip human-only, production-ops-only, external-account, manual-secret, live migration, deploy, or activation work.
 - Skip any issue already covered by an open PR, active branch, active automation branch, or active worktree.
+- Repair existing linked open PRs: if an open PR closes or links a candidate issue, ensure the PR has the issue's queue/review labels before skipping it as already covered.
 - Prefer issues with clear acceptance criteria, implementation scope, and verification steps.
 - If no safe issue is ready, report why and stop without creating a branch.
 
@@ -42,6 +49,9 @@ Implementation workflow:
 - Do not run destructive commands, production writes, deploys, or live migrations.
 - Commit the change and open a pull request against [TRUNK].
 - Link the issue in the PR body only when the implementation fully satisfies it.
+- When opening a PR, mirror source issue labels onto the PR: always copy queue labels (`codex:automation`, `claude:routine`) and copy existing classification/review labels such as `code-quality`, `security`, `product`, `bug`, `enhancement`, `backend`, `frontend`, `infra`, and `e2e`.
+- Do not invent labels from project fields like Priority, Status, or Area unless those labels already exist on the issue.
+- If a non-ShipCode issue or PR has stale `shipcode:agent:codex` or `shipcode:agent:claude`, or any issue or PR has stale plural `claude:routines`, remove it only when the correct queue label is present or can be added with clear evidence; otherwise report it as uncertain.
 - Move the project item to review when supported.
 - Do not merge the PR.
 

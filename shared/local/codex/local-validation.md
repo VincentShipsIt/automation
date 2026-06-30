@@ -9,7 +9,7 @@ Recommended settings:
 
 ## Prompt
 
-Run scheduled local validation for `[PROJECT]`.
+Run local validation for `[PROJECT]`.
 
 Scope:
 

@@ -17,7 +17,7 @@ Repository policy:
 Board identity:
 - Read local agent instructions, project memory, and planning docs before changing metadata.
 - Determine the canonical board from existing issue project items, repo/org projects, and linked planning docs.
-- If board identity is ambiguous, stop and report it as a blocker instead of guessing.
+- If board identity is ambiguous, stop and report it as a blocker.
 
 Required audit:
 - List all open issues, active board items, and active milestones.

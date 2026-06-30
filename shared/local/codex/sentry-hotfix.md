@@ -24,14 +24,14 @@ Repository policy:
 Sentry policy:
 
 - Check unresolved Sentry issues for `[SENTRY_ORG]` and `[SENTRY_PROJECTS]`.
-- Use available Sentry tools, CLI, or API credentials already available in the environment.
+- Use available Sentry tools, CLI, or API credentials.
 - Never print tokens or secrets.
 - For each unresolved issue, inspect the latest event, stacktrace, route, environment/release, tags, and suspect code before deciding whether a code change is needed.
 - Check open PRs and recent branches for the issue short ID, title, route, and stack signature to avoid duplicate fix PRs.
 
 Worktree hard gate:
 
-- This automation must run in the Codex worktree execution environment, not directly in the main checkout.
+- This automation must run in the Codex worktree execution environment.
 - Treat `[REPO_PATH]` as the source checkout only; do not edit, commit, stash, reset, switch, or pull there.
 - If `pwd` resolves to the source checkout, stop and report blocked.
 - Base fixes from local `[TRUNK]` in the source checkout.

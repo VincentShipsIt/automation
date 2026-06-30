@@ -4,7 +4,7 @@ Use for Claude Desktop scheduled tasks with GitHub access.
 
 ## Prompt
 
-Clean up this repository's GitHub issue board and keep issues current without creating duplicates.
+Clean up this repository's GitHub issue board and keep issues current.
 
 Repository policy:
 

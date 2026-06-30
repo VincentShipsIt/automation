@@ -3,7 +3,7 @@ name: repo-hygiene-cleanup
 description: Safe multi-repo hygiene check with no code changes by default
 ---
 
-Run a safe hygiene check for the configured repositories.
+Run a hygiene check for the configured repositories.
 
 Repositories:
 - `[REPO_PATH_1]` - `[GITHUB_REPO_1]` - trunk `[TRUNK]`

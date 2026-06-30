@@ -23,7 +23,7 @@ Workflow:
 
 - Read `AGENTS.md`, `CLAUDE.md`, and relevant local memory or label guidance when present.
 - Inspect open issues, labels, milestones, open and merged PRs, and GitHub project fields.
-- Run read-only git/GitHub inspection only when needed for evidence, such as branch lists, PR state, or worktree inventory.
+- Run read-only git/GitHub inspection only when needed for evidence.
 - Do not create duplicate issues or board cards.
 - Search by issue URL, title, normalized title slug, linked PRs, and branch names before adding or updating any board item.
 

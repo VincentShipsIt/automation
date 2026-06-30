@@ -72,7 +72,7 @@ Memory cleanup workflow:
 
 - Classify each relevant memory claim as current, stale, too broad, duplicated, contradictory, missing replacement context, or unverifiable.
 - Fix only source-backed stale or contradictory guidance.
-- When a migration has changed the operational truth, replace obsolete negative warnings with concise current guidance and evidence. Do not preserve stale warnings in a way that keeps old context dominant.
+- When a migration has changed the operational truth, replace obsolete negative warnings with current guidance and evidence. Do not preserve stale warnings in a way that keeps old context dominant.
 - If the repo still contains legacy references during a migration, describe the current rule and the limited legacy exception precisely.
 - Remove duplicate or conflicting memory entries when one source-backed instruction is enough.
 - Keep durable human/team preferences unless they conflict with repo-scoped technical facts.

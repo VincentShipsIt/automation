@@ -15,7 +15,7 @@ Safety:
 - Never delete the main checkout, current branch, unmerged work, dirty worktrees, or branches with unpushed commits.
 - Only remove worktrees whose branches are fully merged into `[TRUNK]` or whose PRs are merged.
 - Before deleting anything, verify git status is clean for that worktree.
-- Use non-destructive listing first, then remove only confirmed safe targets.
+- Use non-destructive listing, then remove confirmed safe targets.
 
 Output:
 - Report removed worktrees, removed branches, skipped dirty/unmerged targets, and blockers.

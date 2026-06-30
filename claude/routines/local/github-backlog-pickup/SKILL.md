@@ -5,7 +5,7 @@ description: Fully autonomous pickup of one eligible backlog issue
 
 ultracode
 
-Operate fully autonomously: do not pause for input. Make reasonable decisions, document them in the issue or PR, and stop cleanly if blocked.
+Do not pause for input. Make reasonable decisions, document them in the issue or PR, and stop cleanly if blocked.
 
 Objective:
 - Pick exactly one eligible backlog issue in `[GITHUB_REPO]`.

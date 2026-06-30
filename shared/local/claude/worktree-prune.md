@@ -2,7 +2,7 @@
 
 ## Prompt
 
-Clean up local worktrees and local branches in this repository that are already merged into `[TRUNK]`, conservatively and without touching dirty work.
+Clean up local worktrees and local branches in this repository that are already merged into `[TRUNK]`.
 
 Repository policy:
 

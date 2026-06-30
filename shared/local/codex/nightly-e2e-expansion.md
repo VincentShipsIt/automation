@@ -37,6 +37,7 @@ Workflow:
 - Add the spec to every scheduler/list that controls nightly execution and keep runner lists in sync.
 - Verify every assertion against actual source.
 - Run allowed static checks and compile/discovery gates when available.
+- Search open PRs and branches for an existing nightly e2e spec for the same area; if one exists, report it and stop.
 - Commit, push, and open one PR against `[TRUNK]`.
 - Do not merge the PR.
 

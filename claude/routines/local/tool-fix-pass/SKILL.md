@@ -14,6 +14,8 @@ Scope:
 - Optional baseline command: `[TOOL_BASELINE_COMMAND]`.
 - Optional verification command: `[TOOL_VERIFY_COMMAND]`.
 - Do not inspect, modify, summarize, or report on `[OUT_OF_SCOPE_PROJECTS]`.
+- Never merge PRs, deploy, run production migrations, or write to production data.
+- Never print tokens, secrets, `.env` contents, private payloads, or credentials.
 
 Workflow:
 - Read local agent instructions.

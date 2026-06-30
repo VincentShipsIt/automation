@@ -23,12 +23,14 @@ Workflow:
 - List open issues and open PRs.
 - Check branches and worktrees for duplicate work.
 - Claim the selected issue when supported.
-- Create a fresh branch/worktree from `[TRUNK]`.
+- Run `git fetch --all --prune`.
+- Create a fresh branch/worktree from `origin/[TRUNK]`.
 - Implement with focused tests where practical.
 - Use existing codebase patterns and at least three examples before introducing new structure.
-- Run scoped validation only.
+- Run focused validation for touched areas (commands executed and pass/fail result required).
 - Push, open a PR, and comment with the PR link when supported.
 - Do not merge the PR.
+- If no eligible issue exists after checking, report why and stop without opening a PR.
 
 Resource limits:
 - Do not run full test suites, full builds, dev servers, docker, or watch mode locally.
@@ -36,4 +38,4 @@ Resource limits:
 - Keep shell-executing subagents or parallel tasks bounded.
 
 Output:
-- Report selected issue, branch, PR URL, validation, blockers, and residual risk.
+- Report selected issue, branch, PR URL, validation (commands executed, pass/fail), blockers, and residual risk.

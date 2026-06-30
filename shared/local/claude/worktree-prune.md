@@ -9,7 +9,7 @@ Repository policy:
 - This task is scoped only to `[PROJECT]`: `[REPO_PATH]`.
 - Do not inspect, modify, summarize, or report on `[OUT_OF_SCOPE_PROJECTS]`.
 - Clean local git worktrees and local branches only.
-- Do not delete remote branches or push anything.
+- Do not delete remote branches, push anything, deploy, run live migrations, or write production data.
 - Always preserve these branch names exactly: `[TRUNK]`.
 - Also preserve the currently checked-out branch in every worktree, unless that worktree is safely removed.
 
@@ -43,6 +43,7 @@ Cleanup actions:
 - Remove eligible clean worktrees with `git worktree remove` without force.
 - Delete eligible local branches with `git branch -d` only.
 - Run `git worktree prune` after successful removals.
+- If no worktrees or branches are eligible, report no-op with the candidate count and stop.
 
 Output:
 

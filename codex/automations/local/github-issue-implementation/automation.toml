@@ -38,7 +38,7 @@ Implementation workflow:
 - Keep scope tightly tied to the selected issue.
 - Preserve existing architecture and package boundaries.
 - Add focused tests or verification for touched behavior.
-- Run the smallest relevant checks/tests for touched areas.
+- Run the smallest relevant checks/tests for touched areas; if the right verification cannot run, report the blocker and do not push a PR.
 - Do not run destructive commands, production writes, deploys, or live migrations.
 - Commit the change and open a pull request against [TRUNK].
 - Link the issue in the PR body only when the implementation fully satisfies it.

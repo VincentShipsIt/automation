@@ -34,6 +34,8 @@ Discovery:
 
 Branch:
 
+- Run `git fetch --all --prune` first.
+- Before creating a branch, search open PRs and branches for an existing nightly e2e spec for the same area; if one exists, report it and stop.
 - Create a descriptively named branch from `origin/[TRUNK]` only after choosing the area.
 - Use a name like `e2e-nightly-<area>`.
 - Do not leave work on a random harness branch.

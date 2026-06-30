@@ -21,6 +21,8 @@ Repository policy:
 
 - This task is scoped only to `[PROJECT]`: `[REPO_PATH]`.
 - Do not inspect, modify, summarize, or report on `[OUT_OF_SCOPE_PROJECTS]`.
+- Never merge PRs, deploy, run live migrations, or write production data.
+- Never print tokens, secrets, or `.env` file contents.
 
 Workflow:
 
@@ -29,6 +31,7 @@ Workflow:
 - Inspect open PRs, local branches, and worktrees for this repository only.
 - Review at most one open PR per run.
 - Prioritize recent automation-created PRs or PRs with changes since the last review.
+- Skip PRs already reviewed at the current head with `[REVIEW_MARKER]`.
 - Do not open a new PR.
 - If there is no suitable open PR, report that and stop.
 - Check out a clean worktree for the PR branch before analysis.

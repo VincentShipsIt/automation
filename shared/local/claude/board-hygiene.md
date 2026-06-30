@@ -39,3 +39,4 @@ Output:
 - Duplicate cleanup.
 - Field/label/title/body changes.
 - Items left uncertain.
+- If nothing changed, report the checks performed.

@@ -20,10 +20,12 @@ Scope:
 
 Workflow:
 
+- Read `[STATE_FILE]` if present; skip any simplification target recorded as attempted since the last merged PR.
 - Run `git fetch --all --prune`.
 - Base work from latest `origin/[TRUNK]`.
 - Search for one clear low-risk simplification target: duplicated logic, redundant branches, unnecessary indirection, stale comments, duplicate config, or obvious unreachable code.
 - Skip if equivalent cleanup/refactor work is already active.
+- If no clear low-risk simplification target is found, stop and report no-op without opening a PR.
 - Prefer targets with focused tests or cheap validation.
 - Preserve behavior exactly.
 - Do not remove features, public APIs, migrations, compatibility code, or uncertain behavior.

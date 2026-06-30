@@ -51,6 +51,8 @@ Final answer format:
 - Missing Milestone fixed
 - Remaining blockers
 - Exact issues still preventing Ready: yes
+
+If nothing changed, report the checks performed.
 """
 status = "PAUSED"
 rrule = "RRULE:FREQ=WEEKLY;BYDAY=MO;BYHOUR=8;BYMINUTE=45"

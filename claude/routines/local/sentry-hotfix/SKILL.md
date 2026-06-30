@@ -30,6 +30,7 @@ Workflow:
 - Apply the smallest safe fix that converts the failure into handled behavior.
 - Add or update focused tests when behavior, shared helpers, auth, validation, persistence, or user-facing flows change.
 - Run focused validation for touched areas.
+- If validation cannot run or fails, report the blocker and do not push a fix PR.
 - Commit, push, and open a PR against `[TRUNK]` with issue IDs, route/signature, root cause, and validation.
 - Do not resolve a Sentry issue unless a clear existing PR or newly opened PR covers it.
 - Do not merge the PR, deploy, run live migrations, or write production data.

@@ -10,6 +10,7 @@ Repositories:
 - `[REPO_PATH_2]` - `[GITHUB_REPO_2]` - trunk `[TRUNK]`
 
 Safety:
+- Fetch and prune remotes for each repository before inspecting branch or worktree state.
 - Read-only by default.
 - Do not inspect, modify, summarize, or report on repositories outside the list.
 - Never delete dirty worktrees, unmerged branches, current branches, or unpushed commits.

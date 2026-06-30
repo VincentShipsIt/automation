@@ -48,6 +48,7 @@ Fix workflow:
 - Apply the smallest code fix that turns bad input, auth, race, missing data, or edge behavior into the correct handled response.
 - Add or update focused tests when behavior, shared helpers, auth, validation, persistence, or user-facing flows change.
 - Run focused validation for touched areas.
+- If validation cannot run or fails, report the blocker and do not push a fix PR.
 - Commit, push, and open a PR against `[TRUNK]` with Sentry short IDs, routes, root cause, and validation commands.
 - Do not resolve issues that have neither a clear existing fix PR nor a newly opened fix PR.
 - Do not merge the PR.

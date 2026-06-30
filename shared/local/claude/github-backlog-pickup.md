@@ -37,7 +37,8 @@ Claim:
 
 - Assign the issue to the automation owner when appropriate.
 - Comment that an automated session picked it up with start time.
-- Create a worktree/branch off `[TRUNK]` named `issue-<number>-<short-slug>`.
+- Run `git fetch --all --prune` before creating the worktree/branch.
+- Create a worktree/branch off `origin/[TRUNK]` named `issue-<number>-<short-slug>`.
 
 Implement:
 
@@ -62,4 +63,4 @@ Success criteria:
 - One issue claimed.
 - Implementation complete or clearly blocked.
 - PR opened or draft PR opened with blocker.
-- Verification listed.
+- Verification listed with commands executed and pass/fail outcome.

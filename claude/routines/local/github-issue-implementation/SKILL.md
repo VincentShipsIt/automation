@@ -28,6 +28,8 @@ Workflow:
 - Create a fresh timestamped branch `[BRANCH_PREFIX]-YYYYMMDD-HHMMSS` from `origin/[TRUNK]`.
 - Follow existing codebase patterns; find at least three examples before introducing a new pattern.
 - Add focused tests or validation for changed behavior.
+- Run the smallest relevant checks/tests for touched areas; if the right verification command cannot run, report the blocker and do not push a PR.
+- Do not run destructive commands, production writes, deploys, or live migrations.
 - Commit and open a pull request against `[TRUNK]`.
 - Do not merge the PR.
 

@@ -23,6 +23,8 @@ Repository policy:
 - Optional baseline command: `[TOOL_BASELINE_COMMAND]`.
 - Optional verification command: `[TOOL_VERIFY_COMMAND]`.
 - Do not inspect, modify, summarize, or report on `[OUT_OF_SCOPE_PROJECTS]`.
+- Never merge PRs, deploy, run live migrations, or write production data.
+- Never print tokens, secrets, `.env` contents, or environment file contents.
 
 Workflow:
 

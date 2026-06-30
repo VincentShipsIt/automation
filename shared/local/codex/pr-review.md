@@ -23,6 +23,7 @@ Workflow:
 - Inspect open PRs, local branches, remote branches, worktrees, and prior review markers.
 - Review at most one open PR per run.
 - Skip PRs already reviewed at the current head with `[REVIEW_MARKER]`.
+- If there is no suitable PR, report that and stop.
 - Check out a clean worktree for the PR branch before analysis.
 - Review current branch changes against `[TRUNK]`.
 - Focus on correctness, maintainability, abstraction quality, codebase health, simplification, modularity, duplication, succinctness, and legibility.

@@ -11,6 +11,7 @@ Authority:
 - You may edit documentation files in scope.
 - Do not ask for permission to fix stale documentation.
 - Do not edit source code unless the task explicitly allows it.
+- Never merge PRs, deploy, run production migrations, or write to production data.
 
 Preflight:
 
